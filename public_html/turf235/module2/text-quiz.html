@@ -3,660 +3,152 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TURF 235 • Vegetative Traits Quiz</title>
+<title>TURF 235 • Chapter 3 Text Quiz</title>
 <style>
-:root{
-  --green:#0d5722;
-  --green2:#1b7333;
-  --paper:#fbfcf8;
-  --line:#c7d8c8;
-  --muted:#5e6f62;
-  --good:#1f7a35;
-  --bad:#b33535;
-}
+:root{--green:#0d5722;--red:#e2232e;--good:#188038;--line:#ccd2d4;--panel:#f2f4f5}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-  color:#142018;
-  background:linear-gradient(#f6fbf6,#ecf4ec);
-}
-header{
-  text-align:center;
-  padding:24px 16px 14px;
-}
-h1{
-  margin:0;
-  color:var(--green);
-  font-size:clamp(30px,4.8vw,56px);
-  line-height:1;
-}
-header p{
-  color:var(--muted);
-  margin:10px auto 0;
-  max-width:960px;
-}
-header a{
-  color:var(--green2);
-  font-weight:700;
-}
-.toolbar{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:#f6fbf6f0;
-  backdrop-filter:blur(8px);
-  border-top:1px solid #d9e4da;
-  border-bottom:1px solid #d9e4da;
-}
-.toolbar-inner{
-  max-width:1220px;
-  margin:auto;
-  padding:10px 14px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-}
-button, select{
-  font:inherit;
-  border:1px solid #aabdad;
-  border-radius:12px;
-  background:white;
-  padding:10px 14px;
-  font-weight:700;
-  cursor:pointer;
-}
-button.primary{
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
-button.secondary{
-  background:#eef5ee;
-}
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-main{
-  max-width:1220px;
-  margin:18px auto 40px;
-  padding:0 14px;
-}
-.stats{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:14px;
-}
-.stat{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:700;
-  color:#23452d;
-}
-.panel{
-  background:var(--paper);
-  border:2px solid var(--green);
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 12px 30px rgba(13,87,34,.12);
-}
-.panel-head{
-  background:linear-gradient(90deg,var(--green),#174b24);
-  color:white;
-  padding:12px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:space-between;
-  align-items:center;
-}
-.panel-head b{
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-.panel-body{
-  display:grid;
-  grid-template-columns:minmax(280px, 420px) 1fr;
-  gap:20px;
-  padding:18px;
-  align-items:start;
-}
-@media (max-width: 900px){
-  .panel-body{ grid-template-columns:1fr; }
-}
-.figure-wrap{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:12px;
-  position:sticky;
-  top:80px;
-}
-.figure-wrap img{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:12px;
-}
-.figure-wrap h2{
-  margin:10px 4px 2px;
-  color:var(--green);
-  font-size:24px;
-}
-.figure-wrap p{
-  margin:0 4px;
-  color:var(--muted);
-  font-style:italic;
-}
-.trait-form h2{
-  margin:4px 0 6px;
-  color:var(--green);
-  font-size:22px;
-}
-.trait-form > p{
-  color:var(--muted);
-  margin-top:0;
-}
-.trait-grid{
-  display:grid;
-  gap:12px;
-  margin-top:10px;
-}
-.trait-row{
-  background:white;
-  border:2px solid #b8cab9;
-  border-radius:14px;
-  padding:10px 14px;
-  transition:border-color .15s, background .15s;
-}
-.trait-row label{
-  display:block;
-  font-weight:800;
-  color:#23452d;
-  font-size:14px;
-  margin-bottom:6px;
-}
-.trait-row select{
-  width:100%;
-  padding:10px 12px;
-}
-.trait-row.correct{
-  background:#edf8ef;
-  border-color:var(--good);
-}
-.trait-row.wrong{
-  background:#fff0f0;
-  border-color:var(--bad);
-}
-.trait-correct{
-  display:none;
-  margin-top:6px;
-  font-size:13px;
-  color:var(--bad);
-}
-.trait-correct b{ color:#142018; }
-.trait-row.wrong .trait-correct{ display:block; }
-.feedback{
-  margin-top:14px;
-  min-height:26px;
-  font-weight:800;
-  font-size:18px;
-}
-.feedback.good{ color:var(--good); }
-.feedback.bad{ color:var(--bad); }
-.help{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:14px;
-}
-.action-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-.empty{
-  text-align:center;
-  background:white;
-  border:2px solid var(--green);
-  border-radius:24px;
-  padding:34px 20px;
-  box-shadow:0 12px 30px rgba(13,87,34,.10);
-}
-.empty h2{
-  color:var(--green);
-  font-size:36px;
-  margin:0 0 8px;
-}
-.empty p{
-  color:var(--muted);
-  margin:6px 0;
-}
-footer{
-  text-align:center;
-  color:#6d7d71;
-  font-size:13px;
-  padding:8px 10px 24px;
-}
-kbd{
-  background:#eef3ed;
-  border:1px solid #c9d4ca;
-  border-bottom-width:2px;
-  border-radius:6px;
-  padding:1px 5px;
-}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#172b3a}
+header{max-width:1180px;margin:auto;padding:24px 24px 10px}
+h1{margin:0;color:var(--green);font-size:36px}
+header p{color:#54626b;line-height:1.45}
+.toolbar{position:sticky;top:0;z-index:10;background:#fff;border-block:1px solid #ddd;padding:10px 24px}
+.toolbar-inner{max-width:1180px;margin:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+button,select{font:inherit;padding:9px 13px;border:1px solid #aab2b7;border-radius:5px;background:white;cursor:pointer}
+button.primary{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
+.scorebox{margin-left:auto;font-weight:700}
+main{max-width:1180px;margin:20px auto 60px;padding:0 24px}
+.question{border:1px solid #aeb5b8;margin:0 0 28px;background:#fff}
+.question.correct{border:2px solid var(--good)}
+.question.incorrect{border:2px solid var(--red)}
+.badge{display:none;color:#fff;padding:7px 10px;font-weight:700;width:max-content;margin-top:-34px;margin-left:-2px;border-radius:4px 4px 0 0}
+.incorrect .badge{display:block;background:var(--red)}
+.correct .badge{display:block;background:var(--good)}
+.qhead{background:var(--panel);border-bottom:1px solid #aeb5b8;padding:15px 18px;display:flex;justify-content:space-between;font-size:18px;font-weight:700}
+.qbody{padding:24px 20px 20px}
+.stem{font-size:16px;margin-bottom:20px}
+.option{display:flex;gap:10px;align-items:flex-start;border-top:1px solid #e2e4e5;padding:12px 10px;cursor:pointer}
+.option:last-child{border-bottom:1px solid #e2e4e5}
+.option input{margin-top:2px}
+.option.correct-answer{background:#edf8ef}
+.option.chosen-wrong{background:#fff0f0}
+.feedback{display:none;margin-top:14px;font-weight:700}
+.correct .feedback,.incorrect .feedback{display:block}
+.correct .feedback{color:var(--good)}
+.incorrect .feedback{color:var(--red)}
+.bottom{display:flex;gap:12px;justify-content:flex-end;align-items:center;margin-top:24px;flex-wrap:wrap}
+.note{font-size:13px;color:#66747b}
+@media(max-width:700px){.scorebox{margin-left:0;width:100%}.qhead{font-size:16px}.toolbar{position:static}}
 </style>
 </head>
 <body>
 <header>
-  <h1>TURF 235 • Vegetative Traits Quiz</h1>
-  <p>The species is shown for each card. Fill in all nine dropdowns with the correct vegetative identification traits, then hit <b>Submit</b>. A card only clears the deck once every trait is correct — otherwise it cycles back for another try.</p>
-  <p><a href="flashcards.html">← Back to the picture ID flashcards</a> • <a href="index.html">Study guide</a> • <a href="../index.html">All modules</a></p>
+<h1>TURF 235 • Chapter 3 Text Quiz</h1>
+<p><strong>Source restriction:</strong> every keyed fact on this page comes only from the uploaded Chapter 3 textbook PDF. The screenshots were used only to mimic the question style. Each new quiz randomly selects 50 questions from a larger textbook-grounded bank.</p>
 </header>
-
-<div class="toolbar">
-  <div class="toolbar-inner">
-    <button class="primary" id="btnShuffle">Shuffle Deck</button>
-    <button class="secondary" id="btnPrev">← Previous</button>
-    <button class="secondary" id="btnNext">Skip / Next →</button>
-    <button class="primary" id="btnProceed" disabled>Proceed</button>
-    <select id="groupSelect">
-      <option value="all">All groups</option>
-      <option value="Bluegrass">Bluegrass</option>
-      <option value="Bentgrass">Bentgrass</option>
-      <option value="Ryegrass / Fescue">Ryegrass / Fescue</option>
-      <option value="Bermuda">Bermuda</option>
-      <option value="Zoysia">Zoysia</option>
-      <option value="Broad-blade warm-season">Broad-blade warm-season</option>
-    </select>
-    <button id="btnReset">Reset Progress</button>
-  </div>
-</div>
-
+<div class="toolbar"><div class="toolbar-inner">
+<button class="primary" id="newQuiz">New 50-Question Quiz</button>
+<select id="focus">
+<option value="all">All topics</option>
+<option value="vernation">Vernation</option>
+<option value="ligule">Ligules</option>
+<option value="auricles">Auricles</option>
+<option value="adaxial">Adaxial surfaces</option>
+<option value="abaxial">Abaxial surfaces</option>
+<option value="inflorescence">Inflorescences</option>
+<option value="diagnostic">Species ID / diagnostic</option>
+<option value="anatomy">Leaf anatomy</option>
+</select>
+<span class="scorebox" id="scorebox">Not submitted</span>
+</div></div>
 <main>
-  <div class="stats">
-    <div class="stat" id="statRemaining">Remaining: 0</div>
-    <div class="stat" id="statCorrect">Fully correct: 0</div>
-    <div class="stat" id="statWrong">Needs review: 0</div>
-  </div>
-  <div id="app"></div>
+<div id="quiz"></div>
+<div class="bottom">
+<span class="note">Answers remain hidden until you submit.</span>
+<button class="primary" id="submitQuiz">Submit Quiz</button>
+</div>
 </main>
-
-<footer>Keyboard: <kbd>Enter</kbd> submit / proceed • <kbd>←</kbd> previous • <kbd>→</kbd> skip/next</footer>
-
 <script>
-const TRAITS = [
-  {"name":"Kentucky bluegrass","latin":"Poa pratensis","group":"Bluegrass","image":"assets/kentucky-bluegrass.jpg",
-    "vernation":"Folded","ligule":"Membranous, short, blunt (truncate)","auricles":"Absent",
-    "collar":"Narrow, light green, divided by the midrib","blade":"Boat-shaped (prow) tip, parallel sides, soft",
-    "adaxial":"Two parallel \"railroad-track\" veins beside the midrib","abaxial":"Glossy and keeled",
-    "inflorescence":"Open, pyramidal panicle","growthHabit":"Rhizomatous"},
-  {"name":"Rough bluegrass","latin":"Poa trivialis","group":"Bluegrass","image":"assets/rough-bluegrass.jpg",
-    "vernation":"Folded","ligule":"Membranous, long and pointed","auricles":"Absent",
-    "collar":"Narrow, light green","blade":"Boat-shaped tip, glossy on both surfaces",
-    "adaxial":"Glossy sheen, faint parallel veins","abaxial":"Very glossy, keeled",
-    "inflorescence":"Open, pyramidal panicle","growthHabit":"Stoloniferous"},
-  {"name":"Annual bluegrass","latin":"Poa annua","group":"Bluegrass","image":"assets/annual-bluegrass.jpg",
-    "vernation":"Folded","ligule":"Membranous, medium length, pointed","auricles":"Absent",
-    "collar":"Narrow, light yellow-green, smooth","blade":"Boat-shaped tip, soft, often crinkled near the tip",
-    "adaxial":"Faint parallel veins, slightly crinkled texture","abaxial":"Glossy and keeled",
-    "inflorescence":"Open panicle, produced nearly year-round","growthHabit":"Bunch-type (some biotypes weakly spreading)"},
-  {"name":"Creeping bentgrass","latin":"Agrostis stolonifera","group":"Bentgrass","image":"assets/creeping-bentgrass.jpg",
-    "vernation":"Rolled","ligule":"Membranous, long, pointed, often toothed","auricles":"Absent",
-    "collar":"Narrow, continuous","blade":"Fine, narrow, tapering to a fine point",
-    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
-    "inflorescence":"Open to contracted, narrow panicle","growthHabit":"Stoloniferous"},
-  {"name":"Colonial bentgrass","latin":"Agrostis capillaris","group":"Bentgrass","image":"assets/colonial-bentgrass.jpg",
-    "vernation":"Rolled","ligule":"Membranous, short, truncate","auricles":"Absent",
-    "collar":"Narrow","blade":"Fine-textured, flat, tapering",
-    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
-    "inflorescence":"Open, airy panicle","growthHabit":"Short rhizomes and weak stolons"},
-  {"name":"Velvet bentgrass","latin":"Agrostis canina","group":"Bentgrass","image":"assets/velvet-bentgrass.jpg",
-    "vernation":"Rolled","ligule":"Membranous, long, pointed (longest of the group)","auricles":"Absent",
-    "collar":"Narrow","blade":"Very fine, bristle-like, the narrowest blade of the group",
-    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
-    "inflorescence":"Narrow, contracted panicle","growthHabit":"Fine stolons, forms a dense mat"},
-  {"name":"Redtop","latin":"Agrostis gigantea","group":"Bentgrass","image":"assets/redtop.jpg",
-    "vernation":"Rolled","ligule":"Membranous, long and pointed","auricles":"Absent",
-    "collar":"Broad, more distinct than others in its group","blade":"Wider and coarser than related fine-textured grasses, flat",
-    "adaxial":"Ribbed","abaxial":"Smooth and glossy",
-    "inflorescence":"Open panicle, often reddish-tinged","growthHabit":"Short, stout rhizomes"},
-  {"name":"Perennial ryegrass","latin":"Lolium perenne","group":"Ryegrass / Fescue","image":"assets/perennial-ryegrass.jpg",
-    "vernation":"Folded","ligule":"Membranous, short","auricles":"Present, small, claw-like",
-    "collar":"Broad, distinct, often pale-margined","blade":"Tapering, prominent midrib",
-    "adaxial":"Dull, prominently ribbed","abaxial":"Glossy, keeled (double-track shine)",
-    "inflorescence":"Spike, spikelets set edgewise, usually awnless","growthHabit":"Bunch-type"},
-  {"name":"Annual ryegrass","latin":"Lolium multiflorum","group":"Ryegrass / Fescue","image":"assets/annual-ryegrass.jpg",
-    "vernation":"Rolled","ligule":"Membranous, medium length","auricles":"Present, larger, often clasping",
-    "collar":"Broad","blade":"Wider blade than its folded-vernation relative, glossy underside",
-    "adaxial":"Dull, ribbed","abaxial":"Glossy, keeled",
-    "inflorescence":"Spike, spikelets usually awned","growthHabit":"Bunch-type"},
-  {"name":"Tall fescue","latin":"Festuca arundinacea","group":"Ryegrass / Fescue","image":"assets/tall-fescue.jpg",
-    "vernation":"Rolled","ligule":"Membranous, very short (minute)","auricles":"Present, small, blunt, finely ciliate",
-    "collar":"Broad, divided, may bear short hairs at the margin","blade":"Wide, coarse, prominent widely spaced veins, rough margins",
-    "adaxial":"Prominent, widely spaced ribs, glossy","abaxial":"Glossy and keeled",
-    "inflorescence":"Large, open panicle","growthHabit":"Bunch-type (short rhizomes in turf-type forms)"},
-  {"name":"Red fescue","latin":"Festuca rubra","group":"Ryegrass / Fescue","image":"assets/red-fescue.jpg",
-    "vernation":"Folded","ligule":"Membranous, very short, truncate","auricles":"Absent",
-    "collar":"Narrow, smooth","blade":"Very fine, bristle-like, folded/involute",
-    "adaxial":"Ribbed","abaxial":"Smooth, slightly keeled",
-    "inflorescence":"Narrow panicle","growthHabit":"Rhizomatous"},
-  {"name":"Sheep fescue","latin":"Festuca ovina","group":"Ryegrass / Fescue","image":"assets/sheep-fescue.jpg",
-    "vernation":"Folded","ligule":"Membranous, very short, truncate","auricles":"Absent",
-    "collar":"Narrow","blade":"Extremely fine, bristle-like, blue-green, involute (round in cross-section)",
-    "adaxial":"Ribbed","abaxial":"Smooth",
-    "inflorescence":"Narrow, compact panicle","growthHabit":"Bunch-type"},
-  {"name":"Bermudagrass","latin":"Cynodon dactylon","group":"Bermuda","image":"assets/bermudagrass.jpg",
-    "vernation":"Folded","ligule":"Fringe of hairs","auricles":"Absent",
-    "collar":"Broad, hairy margins","blade":"Flat to slightly folded, rough margins, pointed tip",
-    "adaxial":"Sparse hairs near the base, ribbed","abaxial":"Smooth, keeled",
-    "inflorescence":"Digitate raceme (\"crow's foot\" of finger-like spikes)","growthHabit":"Both stolons and rhizomes"},
-  {"name":"Hybrid bermudagrass","latin":"Cynodon dactylon × Cynodon transvaalensis","group":"Bermuda","image":"assets/hybrid-bermudagrass.jpg",
-    "vernation":"Folded","ligule":"Fringe of hairs","auricles":"Absent",
-    "collar":"Broad, sparsely hairy","blade":"Fine and dense",
-    "adaxial":"Sparse hairs, ribbed","abaxial":"Smooth, keeled",
-    "inflorescence":"Digitate raceme, rarely fertile","growthHabit":"Both stolons and rhizomes, very dense"},
-  {"name":"Mascarenegrass","latin":"Zoysia tenuifolia","group":"Zoysia","image":"assets/mascarenegrass.jpg",
-    "vernation":"Rolled","ligule":"Fringe of hairs, very short","auricles":"Absent",
-    "collar":"Narrow, hairy","blade":"Extremely fine, short, densely hairy",
-    "adaxial":"Densely hairy","abaxial":"Sparsely hairy to smooth",
-    "inflorescence":"Short, compact terminal spike-like raceme","growthHabit":"Stoloniferous, mounding \"puffy\" texture"},
-  {"name":"Hybrid zoysia","latin":"Zoysia japonica × Zoysia tenuifolia","group":"Zoysia","image":"assets/hybrid-zoysia.jpg",
-    "vernation":"Rolled","ligule":"Fringe of hairs, short","auricles":"Absent",
-    "collar":"Narrow, sparsely hairy","blade":"Fine to medium texture",
-    "adaxial":"Sparsely hairy","abaxial":"Smooth to sparsely hairy",
-    "inflorescence":"Terminal, spike-like raceme","growthHabit":"Both stolons and rhizomes"},
-  {"name":"Manilagrass","latin":"Zoysia matrella","group":"Zoysia","image":"assets/manilagrass.jpg",
-    "vernation":"Rolled","ligule":"Fringe of hairs, very short","auricles":"Absent",
-    "collar":"Narrow, sparsely hairy margins","blade":"Fine, stiff, pointed tip",
-    "adaxial":"Sparsely hairy near the base","abaxial":"Smooth, glossy",
-    "inflorescence":"Slender, terminal spike-like raceme","growthHabit":"Both stolons and rhizomes"},
-  {"name":"St. Augustinegrass","latin":"Stenotaphrum secundatum","group":"Broad-blade warm-season","image":"assets/st-augustinegrass.jpg",
-    "vernation":"Folded","ligule":"Fringe of hairs, very short","auricles":"Absent",
-    "collar":"Broad, sparsely hairy margins","blade":"Very broad, coarse, blunt/rounded tip",
-    "adaxial":"Prominent midrib, sparsely hairy","abaxial":"Smooth, glossy, prominent keel",
-    "inflorescence":"Flattened spike embedded in a thickened stem","growthHabit":"Stoloniferous, coarse thick stolons"},
-  {"name":"Centipedegrass","latin":"Eremochloa ophiuroides","group":"Broad-blade warm-season","image":"assets/centipedegrass.jpg",
-    "vernation":"Folded","ligule":"Fringe of hairs, very short","auricles":"Absent",
-    "collar":"Broad, sparsely hairy","blade":"Short, broad, blunt (boat-shaped) tip",
-    "adaxial":"Prominent midrib, sparsely hairy","abaxial":"Smooth, keeled",
-    "inflorescence":"Slender, short terminal raceme","growthHabit":"Stoloniferous, slow-growing dense mat"},
-  {"name":"Bahiagrass","latin":"Paspalum notatum","group":"Broad-blade warm-season","image":"assets/bahiagrass.jpg",
-    "vernation":"Rolled","ligule":"Membranous, short, fringed with hairs","auricles":"Absent",
-    "collar":"Broad, sparsely hairy margins","blade":"Broad, coarse, flat, tough",
-    "adaxial":"Prominent midrib, sparsely hairy at the base","abaxial":"Smooth, glossy",
-    "inflorescence":"Y-shaped, usually two spike-like racemes","growthHabit":"Rhizomatous, thick and tough rhizomes"}
-];
+const BANK = [{"q": "The vernation on Kentucky bluegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Rough bluegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Annual bluegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Creeping bentgrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Colonial bentgrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Velvet bentgrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Redtop is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Perennial ryegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Annual ryegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Tall fescue is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Strong creeping red fescue is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Sheep fescue is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Bermudagrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Hybrid bermudagrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Japanese lawngrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Manilagrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on Mascarenegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The vernation on St. Augustinegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Centipedegrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "folded", "tag": "vernation"}, {"q": "The vernation on Bahiagrass is [ folded / rolled ].", "options": ["folded", "rolled"], "answer": "rolled", "tag": "vernation"}, {"q": "The adaxial leaf surface of Kentucky bluegrass is [ smooth / ridged ].", "options": ["smooth", "ridged"], "answer": "smooth", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Rough bluegrass is [ smooth and glossy / dull ].", "options": ["smooth and glossy", "dull"], "answer": "smooth and glossy", "tag": "abaxial"}, {"q": "The adaxial leaf surface of Creeping bentgrass is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Creeping bentgrass is [ smooth / ridged ].", "options": ["smooth", "ridged"], "answer": "smooth", "tag": "abaxial"}, {"q": "The adaxial leaf surface of Colonial bentgrass is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Velvet bentgrass is [ smooth / ridged ].", "options": ["smooth", "ridged"], "answer": "smooth", "tag": "abaxial"}, {"q": "The adaxial leaf surface of Redtop is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The adaxial leaf surface of Perennial ryegrass is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Perennial ryegrass is [ glossy and keeled / dull and flat ].", "options": ["glossy and keeled", "dull and flat"], "answer": "glossy and keeled", "tag": "abaxial"}, {"q": "The adaxial leaf surface of Annual ryegrass is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Annual ryegrass is [ smooth and glossy / dull ].", "options": ["smooth and glossy", "dull"], "answer": "smooth and glossy", "tag": "abaxial"}, {"q": "The adaxial leaf surface of Tall fescue is [ ridged / smooth ].", "options": ["ridged", "smooth"], "answer": "ridged", "tag": "adaxial"}, {"q": "The adaxial leaf surface of St. Augustinegrass is [ smooth / ridged ].", "options": ["smooth", "ridged"], "answer": "smooth", "tag": "adaxial"}, {"q": "The abaxial leaf surface of Centipedegrass is [ smooth / strongly keeled ].", "options": ["smooth", "strongly keeled"], "answer": "smooth", "tag": "abaxial"}, {"q": "The ligule on Kentucky bluegrass is ________.", "options": ["membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed", "membranous, 0.6 to 3 mm long, finely toothed or entire, rounded"], "answer": "membranous, very short, truncate", "tag": "ligule"}, {"q": "The inflorescence of Kentucky bluegrass is a/an ________.", "options": ["open, pyramidal panicle", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "open, pyramidal panicle", "tag": "inflorescence"}, {"q": "Auricles on Kentucky bluegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Rough bluegrass is ________.", "options": ["membranous, 2 to 6 mm long, pointed or notched", "membranous, very short, truncate", "membranous, less than 0.8 to 3 mm long, pointed", "membranous, 0.6 to 3 mm long, finely toothed or entire, rounded"], "answer": "membranous, 2 to 6 mm long, pointed or notched", "tag": "ligule"}, {"q": "The inflorescence of Rough bluegrass is a/an ________.", "options": ["open panicle", "contracted panicle", "short, contracted raceme", "flat spike with awnless spikelets"], "answer": "open panicle", "tag": "inflorescence"}, {"q": "Auricles on Rough bluegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Annual bluegrass is ________.", "options": ["membranous, less than 0.8 to 3 mm long, pointed", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, 0.6 to 3 mm long, finely toothed or entire, rounded"], "answer": "membranous, less than 0.8 to 3 mm long, pointed", "tag": "ligule"}, {"q": "The inflorescence of Annual bluegrass is a/an ________.", "options": ["small open panicle", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "small open panicle", "tag": "inflorescence"}, {"q": "Auricles on Annual bluegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Creeping bentgrass is ________.", "options": ["membranous, 0.6 to 3 mm long, finely toothed or entire, rounded", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.6 to 3 mm long, finely toothed or entire, rounded", "tag": "ligule"}, {"q": "The inflorescence of Creeping bentgrass is a/an ________.", "options": ["contracted panicle, pale or purple colored", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "contracted panicle, pale or purple colored", "tag": "inflorescence"}, {"q": "Auricles on Creeping bentgrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Colonial bentgrass is ________.", "options": ["membranous, 0.3 to 1.2 mm long, truncate", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.3 to 1.2 mm long, truncate", "tag": "ligule"}, {"q": "The inflorescence of Colonial bentgrass is a/an ________.", "options": ["open panicle", "contracted panicle", "short, contracted raceme", "flat spike with awnless spikelets"], "answer": "open panicle", "tag": "inflorescence"}, {"q": "Auricles on Colonial bentgrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Velvet bentgrass is ________.", "options": ["membranous, 0.4 to 0.8 mm long, pointed", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.4 to 0.8 mm long, pointed", "tag": "ligule"}, {"q": "The inflorescence of Velvet bentgrass is a/an ________.", "options": ["reddish, spreading panicle", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "reddish, spreading panicle", "tag": "inflorescence"}, {"q": "Auricles on Velvet bentgrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Redtop is ________.", "options": ["membranous, 1.5 to 5 mm long, rounded", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 1.5 to 5 mm long, rounded", "tag": "ligule"}, {"q": "The inflorescence of Redtop is a/an ________.", "options": ["reddish, spreading panicle", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "reddish, spreading panicle", "tag": "inflorescence"}, {"q": "Auricles on Redtop are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Perennial ryegrass is ________.", "options": ["membranous, 0.5 to 2 mm long, truncate to rounded", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.5 to 2 mm long, truncate to rounded", "tag": "ligule"}, {"q": "The inflorescence of Perennial ryegrass is a/an ________.", "options": ["flat spike with awnless spikelets", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "flat spike with awnless spikelets", "tag": "inflorescence"}, {"q": "Auricles on Perennial ryegrass are ________.", "options": ["small, soft, clawlike", "absent", "pointed, clawlike", "short, blunt, pubescent"], "answer": "small, soft, clawlike", "tag": "auricles"}, {"q": "The ligule on Annual ryegrass is ________.", "options": ["membranous, 0.5 to 2 mm long, rounded", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.5 to 2 mm long, rounded", "tag": "ligule"}, {"q": "The inflorescence of Annual ryegrass is a/an ________.", "options": ["flat spike with awned spikelets", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "flat spike with awned spikelets", "tag": "inflorescence"}, {"q": "Auricles on Annual ryegrass are ________.", "options": ["pointed, clawlike", "absent", "small, soft, clawlike", "short, blunt, pubescent"], "answer": "pointed, clawlike", "tag": "auricles"}, {"q": "The ligule on Tall fescue is ________.", "options": ["membranous, 0.4 to 1.2 mm long, truncate", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.4 to 1.2 mm long, truncate", "tag": "ligule"}, {"q": "The inflorescence of Tall fescue is a/an ________.", "options": ["contracted panicle", "open panicle", "short, contracted raceme", "flat spike with awnless spikelets"], "answer": "contracted panicle", "tag": "inflorescence"}, {"q": "Auricles on Tall fescue are ________.", "options": ["short, blunt, pubescent", "absent", "small, soft, clawlike", "pointed, clawlike"], "answer": "short, blunt, pubescent", "tag": "auricles"}, {"q": "The ligule on Strong creeping red fescue is ________.", "options": ["membranous, 0.1 to 0.4 mm long, truncate", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.1 to 0.4 mm long, truncate", "tag": "ligule"}, {"q": "The inflorescence of Strong creeping red fescue is a/an ________.", "options": ["contracted panicle", "open panicle", "short, contracted raceme", "flat spike with awnless spikelets"], "answer": "contracted panicle", "tag": "inflorescence"}, {"q": "Auricles on Strong creeping red fescue are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Sheep fescue is ________.", "options": ["membranous, 0.3 mm long, rounded", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 0.3 mm long, rounded", "tag": "ligule"}, {"q": "The inflorescence of Sheep fescue is a/an ________.", "options": ["contracted panicle", "open panicle", "short, contracted raceme", "flat spike with awnless spikelets"], "answer": "contracted panicle", "tag": "inflorescence"}, {"q": "Auricles on Sheep fescue are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Bermudagrass is ________.", "options": ["fringe of hairs, 2 to 5 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 2 to 5 mm long", "tag": "ligule"}, {"q": "The inflorescence of Bermudagrass is a/an ________.", "options": ["four or five spicate branches", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "four or five spicate branches", "tag": "inflorescence"}, {"q": "Auricles on Bermudagrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Hybrid bermudagrass is ________.", "options": ["fringe of hairs, 1 to 3 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 1 to 3 mm long", "tag": "ligule"}, {"q": "The inflorescence of Hybrid bermudagrass is a/an ________.", "options": ["four or five spicate branches", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "four or five spicate branches", "tag": "inflorescence"}, {"q": "Auricles on Hybrid bermudagrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Japanese lawngrass is ________.", "options": ["fringe of hairs, 0.05 to 0.25 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 0.05 to 0.25 mm long", "tag": "ligule"}, {"q": "The inflorescence of Japanese lawngrass is a/an ________.", "options": ["short, contracted raceme", "open panicle", "contracted panicle", "flat spike with awnless spikelets"], "answer": "short, contracted raceme", "tag": "inflorescence"}, {"q": "Auricles on Japanese lawngrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Manilagrass is ________.", "options": ["fringe of hairs, 0.05 to 0.25 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 0.05 to 0.25 mm long", "tag": "ligule"}, {"q": "The inflorescence of Manilagrass is a/an ________.", "options": ["short, contracted raceme", "open panicle", "contracted panicle", "flat spike with awnless spikelets"], "answer": "short, contracted raceme", "tag": "inflorescence"}, {"q": "Auricles on Manilagrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Mascarenegrass is ________.", "options": ["fringe of hairs, 0.07 to 0.25 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 0.07 to 0.25 mm long", "tag": "ligule"}, {"q": "The inflorescence of Mascarenegrass is a/an ________.", "options": ["short, contracted raceme", "open panicle", "contracted panicle", "flat spike with awnless spikelets"], "answer": "short, contracted raceme", "tag": "inflorescence"}, {"q": "Auricles on Mascarenegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on St. Augustinegrass is ________.", "options": ["fringe of hairs, 0.3 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "fringe of hairs, 0.3 mm long", "tag": "ligule"}, {"q": "The inflorescence of St. Augustinegrass is a/an ________.", "options": ["short unilateral spikelike raceme", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "short unilateral spikelike raceme", "tag": "inflorescence"}, {"q": "Auricles on St. Augustinegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Centipedegrass is ________.", "options": ["membranous with short hairs at the top, 0.5 mm long", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous with short hairs at the top, 0.5 mm long", "tag": "ligule"}, {"q": "The inflorescence of Centipedegrass is a/an ________.", "options": ["single, spikelike raceme", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "single, spikelike raceme", "tag": "inflorescence"}, {"q": "Auricles on Centipedegrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "The ligule on Bahiagrass is ________.", "options": ["membranous, 1 mm long, truncate", "membranous, very short, truncate", "membranous, 2 to 6 mm long, pointed or notched", "membranous, less than 0.8 to 3 mm long, pointed"], "answer": "membranous, 1 mm long, truncate", "tag": "ligule"}, {"q": "The inflorescence of Bahiagrass is a/an ________.", "options": ["two or three unilateral spikelike branches (racemes)", "open panicle", "contracted panicle", "short, contracted raceme"], "answer": "two or three unilateral spikelike branches (racemes)", "tag": "inflorescence"}, {"q": "Auricles on Bahiagrass are ________.", "options": ["absent", "small, soft, clawlike", "pointed, clawlike", "short, blunt, pubescent"], "answer": "absent", "tag": "auricles"}, {"q": "Which turfgrass has a blade described as smooth on both surfaces with a blunt tip?", "options": ["St. Augustinegrass", "Kentucky bluegrass", "Bermudagrass", "Tall fescue"], "answer": "St. Augustinegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has two light lines astride the central vein and a boat-shaped leaf tip?", "options": ["Kentucky bluegrass", "Tall fescue", "Bahiagrass", "Creeping bentgrass"], "answer": "Kentucky bluegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has a flat spike with awnless spikelets?", "options": ["Perennial ryegrass", "Annual ryegrass", "Redtop", "Centipedegrass"], "answer": "Perennial ryegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has a flat spike with awned spikelets?", "options": ["Annual ryegrass", "Perennial ryegrass", "Kentucky bluegrass", "Bermudagrass"], "answer": "Annual ryegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has four or five spicate branches and a fringe-of-hairs ligule 2 to 5 mm long?", "options": ["Bermudagrass", "Bahiagrass", "Centipedegrass", "St. Augustinegrass"], "answer": "Bermudagrass", "tag": "diagnostic"}, {"q": "Which turfgrass has a single, spikelike raceme and a membranous ligule with short hairs at the top?", "options": ["Centipedegrass", "Bahiagrass", "St. Augustinegrass", "Manilagrass"], "answer": "Centipedegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has two or three unilateral spikelike branches as its inflorescence?", "options": ["Bahiagrass", "St. Augustinegrass", "Centipedegrass", "Bermudagrass"], "answer": "Bahiagrass", "tag": "diagnostic"}, {"q": "Which turfgrass has a broad, continuous collar narrowed to form a short stalk at the base of the blade?", "options": ["St. Augustinegrass", "Kentucky bluegrass", "Rough bluegrass", "Tall fescue"], "answer": "St. Augustinegrass", "tag": "diagnostic"}, {"q": "Which turfgrass has a glossy and keeled abaxial surface and folded vernation?", "options": ["Perennial ryegrass", "Annual ryegrass", "Tall fescue", "Creeping bentgrass"], "answer": "Perennial ryegrass", "tag": "diagnostic"}, {"q": "Which turfgrass is described as the finest-textured, densest, and slowest-growing Zoysia species?", "options": ["Mascarenegrass", "Manilagrass", "Japanese lawngrass", "Hybrid bermudagrass"], "answer": "Mascarenegrass", "tag": "diagnostic"}, {"q": "What scientific name does the textbook use for mascarenegrass?", "options": ["Zoysia pacifica", "Zoysia tenuifolia", "Zoysia japonica", "Zoysia matrella"], "answer": "Zoysia pacifica", "tag": "diagnostic"}, {"q": "The surface layer of cells on the upper and lower sides of a turfgrass leaf is the ________.", "options": ["epidermis", "mesophyll", "bundle sheath", "cuticle"], "answer": "epidermis", "tag": "anatomy"}, {"q": "The internal cells that constitute the primary photosynthetic tissue of a turfgrass leaf are called ________.", "options": ["mesophyll cells", "bulliform cells", "guard cells", "trichomes"], "answer": "mesophyll cells", "tag": "anatomy"}, {"q": "Openings in the epidermis through which gaseous exchange takes place are called ________.", "options": ["stomates", "vascular bundles", "trichomes", "auricles"], "answer": "stomates", "tag": "anatomy"}, {"q": "Each stomate consists of two kidney-shaped ________ surrounding a central pore.", "options": ["guard cells", "bulliform cells", "mesophyll cells", "bundle-sheath cells"], "answer": "guard cells", "tag": "anatomy"}, {"q": "Epidermal outgrowths or hairs are called ________.", "options": ["trichomes", "stomates", "lodicules", "glumes"], "answer": "trichomes", "tag": "anatomy"}, {"q": "The thin, nearly transparent layer covering the entire leaf surface is the ________.", "options": ["cuticle", "mesophyll", "epiblast", "bundle sheath"], "answer": "cuticle", "tag": "anatomy"}, {"q": "Large, thin-walled cells that help unroll or unfold a grass leaf as turgor and water availability increase are ________ cells.", "options": ["bulliform", "guard", "mesophyll", "bundle-sheath"], "answer": "bulliform", "tag": "anatomy"}, {"q": "In C3 pooid turfgrasses, the bundle sheath is formed by a ________ layer of cells.", "options": ["double", "single", "triple", "absent"], "answer": "double", "tag": "anatomy"}, {"q": "In C4 chloridoid and panicoid turfgrasses, the bundle sheath is formed by a ________ layer of cells.", "options": ["single", "double", "triple", "four-cell"], "answer": "single", "tag": "anatomy"}, {"q": "The radial arrangement of elongated mesophyll cells around vascular bundles in C4 grasses is called ________ anatomy.", "options": ["Kranz", "Poa", "Calvin", "stomatal"], "answer": "Kranz", "tag": "anatomy"}];
+let current=[];
 
-const FIELDS = [
-  {key:"vernation", label:"Vernation"},
-  {key:"ligule", label:"Ligule"},
-  {key:"auricles", label:"Auricles"},
-  {key:"collar", label:"Collar"},
-  {key:"blade", label:"Blade"},
-  {key:"adaxial", label:"Adaxial (upper) surface"},
-  {key:"abaxial", label:"Abaxial (lower) surface"},
-  {key:"inflorescence", label:"Inflorescence"},
-  {key:"growthHabit", label:"Growth habit"}
-];
-
-const OPTIONS = {};
-FIELDS.forEach(f => {
-  OPTIONS[f.key] = Array.from(new Set(TRAITS.map(c => c[f.key]))).sort((a,b) => a.localeCompare(b));
-});
-
-let deck = [];
-let cursor = 0;
-let fullyCorrectCount = 0;
-let needsReviewCount = 0;
-let graded = false;
-let pendingProceed = false;
-
-function shuffleArray(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+function shuffle(a){
+  const x=[...a];
+  for(let i=x.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [x[i],x[j]]=[x[j],x[i]];
   }
+  return x;
 }
-
-function filteredDeck(){
-  const g = document.getElementById("groupSelect").value;
-  return TRAITS.filter(card => g === "all" ? true : card.group === g);
-}
-
-function resetDeck(shuffle=true){
-  deck = filteredDeck();
-  if(shuffle) shuffleArray(deck);
-  cursor = 0;
-  fullyCorrectCount = 0;
-  needsReviewCount = 0;
-  graded = false;
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-}
-
-function updateStats(){
-  document.getElementById("statRemaining").textContent = "Remaining: " + deck.length;
-  document.getElementById("statCorrect").textContent = "Fully correct: " + fullyCorrectCount;
-  document.getElementById("statWrong").textContent = "Needs review: " + needsReviewCount;
-}
-
-function updateProceedButton(){
-  document.getElementById("btnProceed").disabled = !pendingProceed;
-}
-
-function showDone(){
-  updateStats();
-  updateProceedButton();
-  document.getElementById("app").innerHTML = `
-    <section class="empty">
-      <h2>Deck complete</h2>
-      <p>You correctly identified every vegetative trait for every active card in this filtered deck.</p>
-      <p>Use <b>Reset Progress</b> to run it again, or change the group filter.</p>
-    </section>`;
-}
-
-function render(){
-  updateStats();
-  pendingProceed = false;
-  updateProceedButton();
-
-  const app = document.getElementById("app");
-  if(deck.length === 0){
-    showDone();
-    return;
-  }
-
-  if(cursor < 0) cursor = deck.length - 1;
-  if(cursor >= deck.length) cursor = 0;
-
-  const card = deck[cursor];
-  graded = false;
-
-  const rowsHtml = FIELDS.map(f => {
-    const opts = OPTIONS[f.key].map(v => `<option value="${escapeAttr(v)}">${escapeHtml(v)}</option>`).join("");
-    return `
-      <div class="trait-row" id="row-${f.key}">
-        <label for="select-${f.key}">${f.label}</label>
-        <select id="select-${f.key}" data-field="${f.key}">
-          <option value="" selected disabled>Select ${f.label.toLowerCase()}…</option>
-          ${opts}
-        </select>
-        <div class="trait-correct" id="correct-${f.key}"></div>
-      </div>`;
-  }).join("");
-
-  app.innerHTML = `
-    <section class="panel">
-      <div class="panel-head">
-        <b>Vegetative traits</b>
-        <span>Card ${cursor + 1} of ${deck.length} • ${card.group}</span>
-      </div>
-      <div class="panel-body">
-        <div class="figure-wrap">
-          <img src="${card.image}" alt="Turfgrass flashcard image">
-          <h2>${card.name}</h2>
-          <p>${card.latin}</p>
-        </div>
-        <div class="trait-form">
-          <h2>Select the correct trait for each category</h2>
-          <p>Every dropdown must be answered before you can submit.</p>
-          <div class="trait-grid" id="traitGrid">${rowsHtml}</div>
-          <div class="feedback" id="feedback"></div>
-          <div class="help">Cards clear the deck only when all nine traits are correct. Any miss sends the card to the back for another attempt.</div>
-          <div class="action-row">
-            <button class="primary" id="btnSubmit" disabled>Submit</button>
-            <button class="primary" id="inlineProceed" disabled>Proceed</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
-
-  FIELDS.forEach(f => {
-    document.getElementById(`select-${f.key}`).addEventListener("change", updateSubmitState);
-  });
-  document.getElementById("btnSubmit").addEventListener("click", submitAnswers);
-  document.getElementById("inlineProceed").addEventListener("click", proceed);
-}
-
-function updateSubmitState(){
-  const allAnswered = FIELDS.every(f => document.getElementById(`select-${f.key}`).value !== "");
-  document.getElementById("btnSubmit").disabled = !allAnswered || graded;
-}
-
 function escapeHtml(s){
-  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
 }
-function escapeAttr(s){
-  return escapeHtml(s).replace(/"/g,"&quot;");
-}
-
-function submitAnswers(){
-  if(graded || deck.length === 0) return;
-  graded = true;
-
-  const card = deck[cursor];
-  const feedback = document.getElementById("feedback");
-  let correctCount = 0;
-
-  FIELDS.forEach(f => {
-    const select = document.getElementById(`select-${f.key}`);
-    const row = document.getElementById(`row-${f.key}`);
-    const correctBox = document.getElementById(`correct-${f.key}`);
-    select.disabled = true;
-    const isCorrect = select.value === card[f.key];
-    if(isCorrect){
-      correctCount++;
-      row.classList.add("correct");
-    } else {
-      row.classList.add("wrong");
-      correctBox.innerHTML = `Correct answer: <b>${escapeHtml(card[f.key])}</b>`;
-    }
-  });
-
-  document.getElementById("btnSubmit").disabled = true;
-
-  if(correctCount === FIELDS.length){
-    fullyCorrectCount++;
-    feedback.className = "feedback good";
-    feedback.textContent = `All ${FIELDS.length} correct — removed from the active deck. Click Proceed when ready.`;
-    deck.splice(cursor, 1);
-    if(cursor >= deck.length) cursor = 0;
+function createQuiz(){
+  const focus=document.getElementById("focus").value;
+  let pool=focus==="all" ? [...BANK] : BANK.filter(q=>q.tag===focus);
+  if(pool.length<50 && focus!=="all"){
+    // Keep focused questions first, then fill the remainder from the full bank.
+    const focused=shuffle(pool);
+    const extras=shuffle(BANK.filter(q=>!focused.some(f=>f.q===q.q)));
+    pool=[...focused,...extras];
   } else {
-    needsReviewCount++;
-    feedback.className = "feedback bad";
-    feedback.textContent = `${correctCount} of ${FIELDS.length} correct — this one will come back later. Click Proceed when ready.`;
-    const missed = deck.splice(cursor, 1)[0];
-    deck.push(missed);
-    if(cursor >= deck.length) cursor = 0;
+    pool=shuffle(pool);
   }
-
-  enableProceed();
-  updateStats();
-}
-
-function enableProceed(){
-  pendingProceed = true;
-  updateProceedButton();
-  const inline = document.getElementById("inlineProceed");
-  if(inline) inline.disabled = false;
-}
-
-function proceed(){
-  if(!pendingProceed) return;
+  current=pool.slice(0,Math.min(50,pool.length)).map((q,i)=>({
+    ...q,
+    options:shuffle(q.options),
+    id:"q"+(i+1)
+  }));
   render();
+  document.getElementById("scorebox").textContent="Not submitted";
 }
-
-function nextCard(){
-  if(pendingProceed){
-    proceed();
-    return;
-  }
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  const skipped = deck.splice(cursor, 1)[0];
-  deck.push(skipped);
-  if(cursor >= deck.length) cursor = 0;
-  render();
+function render(){
+  const quiz=document.getElementById("quiz");
+  quiz.innerHTML=current.map((q,i)=>`
+   <section class="question" id="${q.id}">
+    <div class="badge"></div>
+    <div class="qhead"><span>Question ${i+1}</span><span class="pts">0.25 pts</span></div>
+    <div class="qbody">
+      <div class="stem">${escapeHtml(q.q)}</div>
+      <div class="opts">
+      ${q.options.map((o,n)=>`
+        <label class="option">
+          <input type="radio" name="${q.id}" value="${escapeHtml(o)}">
+          <span>${escapeHtml(o)}</span>
+        </label>`).join("")}
+      </div>
+      <div class="feedback"></div>
+    </div>
+   </section>`).join("");
 }
-
-function prevCard(){
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  cursor = (cursor - 1 + deck.length) % deck.length;
-  render();
+function submit(){
+  let right=0;
+  current.forEach(q=>{
+    const sec=document.getElementById(q.id);
+    const chosen=sec.querySelector(`input[name="${q.id}"]:checked`);
+    const chosenVal=chosen ? chosen.value : null;
+    const ok=chosenVal===q.answer;
+    if(ok) right++;
+    sec.classList.remove("correct","incorrect");
+    sec.classList.add(ok?"correct":"incorrect");
+    sec.querySelector(".badge").textContent=ok?"Correct":"Incorrect";
+    sec.querySelector(".pts").textContent=ok?"0.25 / 0.25 pts":"0 / 0.25 pts";
+    sec.querySelectorAll(".option").forEach(label=>{
+      const input=label.querySelector("input");
+      if(input.value===q.answer) label.classList.add("correct-answer");
+      if(chosenVal && input.value===chosenVal && chosenVal!==q.answer) label.classList.add("chosen-wrong");
+      input.disabled=true;
+    });
+    const fb=sec.querySelector(".feedback");
+    fb.textContent=ok ? "Correct." : `Correct answer: ${q.answer}`;
+  });
+  const pct=Math.round((right/current.length)*100);
+  document.getElementById("scorebox").textContent=`${right} / ${current.length} correct (${pct}%)`;
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
-document.getElementById("btnNext").addEventListener("click", nextCard);
-document.getElementById("btnPrev").addEventListener("click", prevCard);
-document.getElementById("btnProceed").addEventListener("click", proceed);
-document.getElementById("btnShuffle").addEventListener("click", () => {
-  shuffleArray(deck);
-  cursor = 0;
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-});
-document.getElementById("btnReset").addEventListener("click", () => resetDeck(true));
-document.getElementById("groupSelect").addEventListener("change", () => resetDeck(true));
-
-document.addEventListener("keydown", (e) => {
-  const tag = document.activeElement && document.activeElement.tagName;
-  if(e.key === "Enter"){
-    if(tag === "SELECT") return;
-    e.preventDefault();
-    if(pendingProceed){
-      proceed();
-    } else {
-      const btn = document.getElementById("btnSubmit");
-      if(btn && !btn.disabled) submitAnswers();
-    }
-    return;
-  }
-  if(["INPUT","TEXTAREA","SELECT"].includes(tag)) return;
-  if(e.key === "ArrowRight"){
-    e.preventDefault();
-    nextCard();
-  } else if(e.key === "ArrowLeft"){
-    e.preventDefault();
-    prevCard();
-  }
-});
-
-resetDeck(true);
+document.getElementById("newQuiz").onclick=createQuiz;
+document.getElementById("submitQuiz").onclick=submit;
+document.getElementById("focus").onchange=createQuiz;
+createQuiz();
 </script>
 </body>
 </html>
