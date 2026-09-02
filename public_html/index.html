@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TURF 235 • Turfgrass ID Quiz</title>
+<title>TURF 235 • Course Modules</title>
 <style>
 :root{
   --green:#0d5722;
@@ -11,8 +11,6 @@
   --paper:#fbfcf8;
   --line:#c7d8c8;
   --muted:#5e6f62;
-  --good:#1f7a35;
-  --bad:#b33535;
 }
 *{box-sizing:border-box}
 body{
@@ -23,7 +21,7 @@ body{
 }
 header{
   text-align:center;
-  padding:24px 16px 14px;
+  padding:36px 16px 14px;
 }
 h1{
   margin:0;
@@ -34,181 +32,82 @@ h1{
 header p{
   color:var(--muted);
   margin:10px auto 0;
-  max-width:960px;
-}
-.toolbar{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:#f6fbf6f0;
-  backdrop-filter:blur(8px);
-  border-top:1px solid #d9e4da;
-  border-bottom:1px solid #d9e4da;
-}
-.toolbar-inner{
-  max-width:1220px;
-  margin:auto;
-  padding:10px 14px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:center;
-}
-button, select{
-  font:inherit;
-  border:1px solid #aabdad;
-  border-radius:12px;
-  background:white;
-  padding:10px 14px;
-  font-weight:700;
-  cursor:pointer;
-}
-button.primary{
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
-button.secondary{
-  background:#eef5ee;
-}
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+  max-width:760px;
 }
 main{
-  max-width:1220px;
-  margin:18px auto 40px;
+  max-width:1100px;
+  margin:24px auto 48px;
   padding:0 14px;
 }
-.stats{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:14px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:20px;
 }
-.stat{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:700;
-  color:#23452d;
-}
-.panel{
+.card{
   background:var(--paper);
   border:2px solid var(--green);
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 12px 30px rgba(13,87,34,.12);
-}
-.panel-head{
-  background:linear-gradient(90deg,var(--green),#174b24);
-  color:white;
-  padding:12px 16px;
+  border-radius:22px;
+  padding:20px 22px;
+  box-shadow:0 12px 30px rgba(13,87,34,.10);
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:space-between;
-  align-items:center;
+  flex-direction:column;
 }
-.panel-head b{
+.card.placeholder{
+  border-style:dashed;
+  opacity:.85;
+}
+.code{
+  color:var(--green);
+  font-weight:800;
+  font-size:14px;
   letter-spacing:.06em;
   text-transform:uppercase;
 }
-.panel-body{
-  display:grid;
-  grid-template-columns:minmax(320px, 540px) 1fr;
-  gap:20px;
-  padding:18px;
-  align-items:start;
+.card h2{
+  margin:4px 0 10px;
+  font-size:22px;
+  color:#142018;
 }
-@media (max-width: 900px){
-  .panel-body{ grid-template-columns:1fr; }
+.status{
+  display:inline-block;
+  align-self:flex-start;
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:12px;
 }
-.figure-wrap{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:12px;
-}
-.figure-wrap img{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:12px;
-}
-.choice-area h2{
-  margin:4px 0 6px;
+.status.ready{
+  background:#edf8ef;
   color:var(--green);
-  font-size:28px;
+  border:1px solid var(--green2);
 }
-.choice-area p{
-  color:var(--muted);
-  margin-top:0;
+.status.soon{
+  background:#f3efe6;
+  color:#8a6d1f;
+  border:1px solid #d8c48c;
 }
-.choices{
-  display:grid;
-  gap:10px;
-  margin-top:14px;
+.links{
+  margin-top:auto;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding-top:10px;
 }
-.choice{
-  text-align:left;
-  width:100%;
-  padding:14px 14px;
-  border-radius:14px;
-  border:2px solid #b8cab9;
-  background:white;
-  font-size:17px;
-  line-height:1.2;
-}
-.choice small{
-  display:block;
-  color:#5d6d62;
-  font-style:italic;
-  font-weight:500;
-  margin-top:4px;
-}
-.choice:hover{ border-color:var(--green2); }
-.choice.correct{ background:#edf8ef; border-color:var(--good); }
-.choice.wrong{ background:#fff0f0; border-color:var(--bad); }
-.choice:disabled{ cursor:default; }
-.feedback{
-  margin-top:14px;
-  min-height:26px;
-  font-weight:800;
-  font-size:18px;
-}
-.feedback.good{ color:var(--good); }
-.feedback.bad{ color:var(--bad); }
-.help{
-  margin-top:8px;
-  color:var(--muted);
+.links a{
+  font-weight:700;
+  text-decoration:none;
+  color:white;
+  background:var(--green);
+  border:1px solid var(--green);
+  border-radius:10px;
+  padding:8px 12px;
   font-size:14px;
 }
-.action-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-.empty{
-  text-align:center;
+.links a.secondary{
   background:white;
-  border:2px solid var(--green);
-  border-radius:24px;
-  padding:34px 20px;
-  box-shadow:0 12px 30px rgba(13,87,34,.10);
-}
-.empty h2{
   color:var(--green);
-  font-size:36px;
-  margin:0 0 8px;
-}
-.empty p{
-  color:var(--muted);
-  margin:6px 0;
 }
 footer{
   text-align:center;
@@ -216,299 +115,81 @@ footer{
   font-size:13px;
   padding:8px 10px 24px;
 }
-kbd{
-  background:#eef3ed;
-  border:1px solid #c9d4ca;
-  border-bottom-width:2px;
-  border-radius:6px;
-  padding:1px 5px;
-}
 </style>
 </head>
 <body>
 <header>
-  <h1>TURF 235 • Turfgrass ID Quiz</h1>
-  <p>Multiple choice flashcards. Correct answers are removed from the active deck. Wrong answers cycle back through later. The quiz waits for you to hit <b>Proceed</b> before moving on.</p>
-  <p><a href="traits-quiz.html">Try the vegetative traits quiz →</a></p>
+  <h1>Turfgrass Science Modules</h1>
+  <p>Study guides and quizzes for the TURF course sequence. Pick a module below to get started.</p>
 </header>
 
-<div class="toolbar">
-  <div class="toolbar-inner">
-    <button class="primary" id="btnShuffle">Shuffle Deck</button>
-    <button class="secondary" id="btnPrev">← Previous</button>
-    <button class="secondary" id="btnNext">Skip / Next →</button>
-    <button class="primary" id="btnProceed" disabled>Proceed</button>
-    <select id="groupSelect">
-      <option value="all">All groups</option>
-      <option value="Bluegrass">Bluegrass</option>
-      <option value="Bentgrass">Bentgrass</option>
-      <option value="Ryegrass / Fescue">Ryegrass / Fescue</option>
-      <option value="Bermuda">Bermuda</option>
-      <option value="Zoysia">Zoysia</option>
-      <option value="Broad-blade warm-season">Broad-blade warm-season</option>
-    </select>
-    <select id="vernationSelect">
-      <option value="all">All vernation types</option>
-      <option value="folded">Folded</option>
-      <option value="rolled">Rolled</option>
-    </select>
-    <button id="btnReset">Reset Progress</button>
-  </div>
-</div>
-
 <main>
-  <div class="stats">
-    <div class="stat" id="statRemaining">Remaining: 0</div>
-    <div class="stat" id="statCorrect">Correct: 0</div>
-    <div class="stat" id="statWrong">Wrong: 0</div>
-  </div>
-  <div id="app"></div>
-</main>
+  <div class="grid">
 
-<footer>Keyboard: <kbd>1</kbd>–<kbd>4</kbd> answer • <kbd>←</kbd> previous • <kbd>→</kbd> skip/next • <kbd>Enter</kbd> proceed after answering</footer>
-
-<script>
-const MASTER = [{"name": "Kentucky bluegrass", "latin": "Poa pratensis", "group": "Bluegrass", "vernation": "folded", "image": "assets/kentucky-bluegrass.jpg"}, {"name": "Rough bluegrass", "latin": "Poa trivialis", "group": "Bluegrass", "vernation": "folded", "image": "assets/rough-bluegrass.jpg"}, {"name": "Annual bluegrass", "latin": "Poa annua", "group": "Bluegrass", "vernation": "folded", "image": "assets/annual-bluegrass.jpg"}, {"name": "Creeping bentgrass", "latin": "Agrostis stolonifera", "group": "Bentgrass", "vernation": "rolled", "image": "assets/creeping-bentgrass.jpg"}, {"name": "Colonial bentgrass", "latin": "Agrostis capillaris", "group": "Bentgrass", "vernation": "rolled", "image": "assets/colonial-bentgrass.jpg"}, {"name": "Velvet bentgrass", "latin": "Agrostis canina", "group": "Bentgrass", "vernation": "rolled", "image": "assets/velvet-bentgrass.jpg"}, {"name": "Redtop", "latin": "Agrostis gigantea", "group": "Bentgrass", "vernation": "rolled", "image": "assets/redtop.jpg"}, {"name": "Perennial ryegrass", "latin": "Lolium perenne", "group": "Ryegrass / Fescue", "vernation": "folded", "image": "assets/perennial-ryegrass.jpg"}, {"name": "Annual ryegrass", "latin": "Lolium multiflorum", "group": "Ryegrass / Fescue", "vernation": "rolled", "image": "assets/annual-ryegrass.jpg"}, {"name": "Tall fescue", "latin": "Festuca arundinacea", "group": "Ryegrass / Fescue", "vernation": "rolled", "image": "assets/tall-fescue.jpg"}, {"name": "Red fescue", "latin": "Festuca rubra", "group": "Ryegrass / Fescue", "vernation": "folded", "image": "assets/red-fescue.jpg"}, {"name": "Sheep fescue", "latin": "Festuca ovina", "group": "Ryegrass / Fescue", "vernation": "folded", "image": "assets/sheep-fescue.jpg"}, {"name": "Bermudagrass", "latin": "Cynodon dactylon", "group": "Bermuda", "vernation": "folded", "image": "assets/bermudagrass.jpg"}, {"name": "Hybrid bermudagrass", "latin": "Cynodon dactylon × Cynodon transvaalensis", "group": "Bermuda", "vernation": "folded", "image": "assets/hybrid-bermudagrass.jpg"}, {"name": "Mascarenegrass", "latin": "Zoysia tenuifolia", "group": "Zoysia", "vernation": "rolled", "image": "assets/mascarenegrass.jpg"}, {"name": "Hybrid zoysia", "latin": "Zoysia japonica × Zoysia tenuifolia", "group": "Zoysia", "vernation": "rolled", "image": "assets/hybrid-zoysia.jpg"}, {"name": "Manilagrass", "latin": "Zoysia matrella", "group": "Zoysia", "vernation": "rolled", "image": "assets/manilagrass.jpg"}, {"name": "St. Augustinegrass", "latin": "Stenotaphrum secundatum", "group": "Broad-blade warm-season", "vernation": "folded", "image": "assets/st-augustinegrass.jpg"}, {"name": "Centipedegrass", "latin": "Eremochloa ophiuroides", "group": "Broad-blade warm-season", "vernation": "folded", "image": "assets/centipedegrass.jpg"}, {"name": "Bahiagrass", "latin": "Paspalum notatum", "group": "Broad-blade warm-season", "vernation": "rolled", "image": "assets/bahiagrass.jpg"}];
-let deck = [];
-let cursor = 0;
-let correctCount = 0;
-let wrongCount = 0;
-let answered = false;
-let currentChoices = [];
-let pendingProceed = false;
-
-function shuffleArray(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-}
-
-function matchesVernation(card, selected){
-  if(selected === "all") return true;
-  const v = (card.vernation || "").toLowerCase();
-  if(selected === "folded") return v.startsWith("folded");
-  if(selected === "rolled") return v.startsWith("rolled");
-  return true;
-}
-
-function filteredDeck(){
-  const g = document.getElementById("groupSelect").value;
-  const v = document.getElementById("vernationSelect").value;
-  return MASTER.filter(card => {
-    const groupOk = g === "all" ? true : card.group === g;
-    const vernOk = matchesVernation(card, v);
-    return groupOk && vernOk;
-  });
-}
-
-function resetDeck(shuffle=true){
-  deck = filteredDeck();
-  if(shuffle) shuffleArray(deck);
-  cursor = 0;
-  correctCount = 0;
-  wrongCount = 0;
-  answered = false;
-  currentChoices = [];
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-}
-
-function buildChoices(correctCard){
-  const distractorPool = MASTER.filter(x => x.name !== correctCard.name);
-  shuffleArray(distractorPool);
-  const options = [correctCard];
-  for(const d of distractorPool){
-    if(options.length >= 4) break;
-    if(!options.find(x => x.name === d.name)) options.push(d);
-  }
-  shuffleArray(options);
-  return options;
-}
-
-function updateStats(){
-  document.getElementById("statRemaining").textContent = "Remaining: " + deck.length;
-  document.getElementById("statCorrect").textContent = "Correct: " + correctCount;
-  document.getElementById("statWrong").textContent = "Wrong: " + wrongCount;
-}
-
-function updateProceedButton(){
-  document.getElementById("btnProceed").disabled = !pendingProceed;
-}
-
-function showDone(){
-  updateStats();
-  updateProceedButton();
-  document.getElementById("app").innerHTML = `
-    <section class="empty">
-      <h2>Deck complete</h2>
-      <p>You cleared every active card in this filtered deck.</p>
-      <p>Use <b>Reset Progress</b> to run it again, or change group / vernation filters.</p>
-    </section>`;
-}
-
-function render(){
-  updateStats();
-  pendingProceed = false;
-  updateProceedButton();
-
-  const app = document.getElementById("app");
-  if(deck.length === 0){
-    showDone();
-    return;
-  }
-
-  if(cursor < 0) cursor = deck.length - 1;
-  if(cursor >= deck.length) cursor = 0;
-
-  const card = deck[cursor];
-  currentChoices = buildChoices(card);
-  answered = false;
-
-  app.innerHTML = `
-    <section class="panel">
-      <div class="panel-head">
-        <b>Identify this turfgrass</b>
-        <span>Card ${cursor + 1} of ${deck.length} • ${card.group} • ${card.vernation}</span>
-      </div>
-      <div class="panel-body">
-        <div class="figure-wrap">
-          <img src="${card.image}" alt="Turfgrass flashcard image">
-        </div>
-        <div class="choice-area">
-          <h2>Which species is this?</h2>
-          <p>Choose the best answer.</p>
-          <div class="choices" id="choices"></div>
-          <div class="feedback" id="feedback"></div>
-          <div class="help">Correct cards are removed. Wrong cards move to the back. The page will not advance until you click <b>Proceed</b>.</div>
-          <div class="action-row">
-            <button class="primary" id="inlineProceed" disabled>Proceed</button>
-          </div>
-        </div>
+    <section class="card">
+      <span class="code">TURF 235</span>
+      <h2>The Turfgrass</h2>
+      <span class="status ready">Available</span>
+      <div class="links">
+        <a href="modules/turf235/flashcards.html">Flashcards</a>
+        <a class="secondary" href="modules/turf235/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf235/text-quiz.html">Text Quiz</a>
       </div>
     </section>
-  `;
 
-  const choicesEl = document.getElementById("choices");
-  currentChoices.forEach((opt, idx) => {
-    const btn = document.createElement("button");
-    btn.className = "choice";
-    btn.innerHTML = `<strong>${idx + 1}. ${opt.name}</strong><small>${opt.latin}</small>`;
-    btn.addEventListener("click", () => answerChoice(opt.name));
-    choicesEl.appendChild(btn);
-  });
+    <section class="card placeholder">
+      <span class="code">TURF 230</span>
+      <h2>Turfgrass Pesticides</h2>
+      <span class="status soon">Coming soon</span>
+      <div class="links">
+        <a class="secondary" href="modules/turf230/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf230/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
 
-  document.getElementById("inlineProceed").addEventListener("click", proceed);
-}
+    <section class="card placeholder">
+      <span class="code">TURF 238/307</span>
+      <h2>Weed Control &amp; Golf Course Irrigation</h2>
+      <span class="status soon">Coming soon</span>
+      <div class="links">
+        <a class="secondary" href="modules/turf238-307/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf238-307/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
 
-function enableProceed(){
-  pendingProceed = true;
-  updateProceedButton();
-  const inline = document.getElementById("inlineProceed");
-  if(inline) inline.disabled = false;
-}
+    <section class="card placeholder">
+      <span class="code">TURF 434</span>
+      <h2>Turfgrass Edaphology</h2>
+      <span class="status soon">Coming soon</span>
+      <div class="links">
+        <a class="secondary" href="modules/turf434/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf434/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
 
-function answerChoice(chosenName){
-  if(answered || deck.length === 0) return;
-  answered = true;
+    <section class="card placeholder">
+      <span class="code">TURF 435</span>
+      <h2>Turfgrass Nutrition</h2>
+      <span class="status soon">Coming soon</span>
+      <div class="links">
+        <a class="secondary" href="modules/turf435/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf435/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
 
-  const card = deck[cursor];
-  const buttons = Array.from(document.querySelectorAll(".choice"));
-  const feedback = document.getElementById("feedback");
+    <section class="card placeholder">
+      <span class="code">TURF 436W</span>
+      <h2>Case Studies in Turfgrass Management</h2>
+      <span class="status soon">Coming soon</span>
+      <div class="links">
+        <a class="secondary" href="modules/turf436w/study-guide.html">Study Guide</a>
+        <a class="secondary" href="modules/turf436w/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
 
-  buttons.forEach((btn, idx) => {
-    const opt = currentChoices[idx];
-    btn.disabled = true;
-    if(opt.name === card.name) btn.classList.add("correct");
-    if(opt.name === chosenName && opt.name !== card.name) btn.classList.add("wrong");
-  });
+  </div>
+</main>
 
-  if(chosenName === card.name){
-    correctCount++;
-    feedback.className = "feedback good";
-    feedback.textContent = "Correct — removed from the active deck. Click Proceed when ready.";
-    deck.splice(cursor, 1);
-    if(cursor >= deck.length) cursor = 0;
-  } else {
-    wrongCount++;
-    feedback.className = "feedback bad";
-    feedback.textContent = "Not quite — this one will come back later. Click Proceed when ready.";
-    const missed = deck.splice(cursor, 1)[0];
-    deck.push(missed);
-    if(cursor >= deck.length) cursor = 0;
-  }
-
-  enableProceed();
-  updateStats();
-}
-
-function proceed(){
-  if(!pendingProceed) return;
-  render();
-}
-
-function nextCard(){
-  if(pendingProceed){
-    proceed();
-    return;
-  }
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  const skipped = deck.splice(cursor, 1)[0];
-  deck.push(skipped);
-  if(cursor >= deck.length) cursor = 0;
-  render();
-}
-
-function prevCard(){
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  cursor = (cursor - 1 + deck.length) % deck.length;
-  render();
-}
-
-document.getElementById("btnNext").addEventListener("click", nextCard);
-document.getElementById("btnPrev").addEventListener("click", prevCard);
-document.getElementById("btnProceed").addEventListener("click", proceed);
-document.getElementById("btnShuffle").addEventListener("click", () => {
-  shuffleArray(deck);
-  cursor = 0;
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-});
-document.getElementById("btnReset").addEventListener("click", () => resetDeck(true));
-document.getElementById("groupSelect").addEventListener("change", () => resetDeck(true));
-document.getElementById("vernationSelect").addEventListener("change", () => resetDeck(true));
-
-document.addEventListener("keydown", (e) => {
-  const tag = document.activeElement && document.activeElement.tagName;
-  if(["INPUT","TEXTAREA","SELECT"].includes(tag)) return;
-
-  if(["1","2","3","4"].includes(e.key)){
-    const idx = parseInt(e.key, 10) - 1;
-    const opt = currentChoices[idx];
-    if(opt) answerChoice(opt.name);
-  } else if(e.key === "ArrowRight"){
-    e.preventDefault();
-    nextCard();
-  } else if(e.key === "ArrowLeft"){
-    e.preventDefault();
-    prevCard();
-  } else if(e.key === "Enter"){
-    if(pendingProceed){
-      e.preventDefault();
-      proceed();
-    }
-  }
-});
-
-resetDeck(true);
-</script>
+<footer>Study aids only — not official course material.</footer>
 </body>
 </html>

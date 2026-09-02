@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TURF 235 • Study Guide</title>
+<style>
+:root{
+  --green:#0d5722;
+  --green2:#1b7333;
+  --paper:#fbfcf8;
+  --line:#c7d8c8;
+  --muted:#5e6f62;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  color:#142018;
+  background:linear-gradient(#f6fbf6,#ecf4ec);
+}
+header{
+  text-align:center;
+  padding:24px 16px 14px;
+}
+h1{
+  margin:0;
+  color:var(--green);
+  font-size:clamp(30px,4.8vw,56px);
+  line-height:1;
+}
+header p{
+  color:var(--muted);
+  margin:10px auto 0;
+  max-width:960px;
+}
+header a{
+  color:var(--green2);
+  font-weight:700;
+}
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#f6fbf6f0;
+  backdrop-filter:blur(8px);
+  border-top:1px solid #d9e4da;
+  border-bottom:1px solid #d9e4da;
+}
+.toolbar-inner{
+  max-width:1220px;
+  margin:auto;
+  padding:10px 14px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+}
+select, input{
+  font:inherit;
+  border:1px solid #aabdad;
+  border-radius:12px;
+  background:white;
+  padding:10px 14px;
+  font-weight:700;
+}
+input#search{
+  min-width:220px;
+  font-weight:500;
+}
+main{
+  max-width:1220px;
+  margin:18px auto 40px;
+  padding:0 14px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  gap:18px;
+}
+.card{
+  background:var(--paper);
+  border:2px solid var(--green);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 24px rgba(13,87,34,.10);
+}
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+  border-bottom:1px solid var(--line);
+}
+.card-body{
+  padding:14px 16px 16px;
+}
+.card-body h2{
+  margin:0;
+  color:var(--green);
+  font-size:20px;
+}
+.card-body .latin{
+  color:var(--muted);
+  font-style:italic;
+  margin:2px 0 10px;
+}
+.badge{
+  display:inline-block;
+  background:#eef5ee;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:12px;
+  font-weight:700;
+  color:#23452d;
+  margin-bottom:10px;
+}
+dl{
+  margin:0;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:4px 10px;
+  font-size:14px;
+}
+dt{
+  font-weight:800;
+  color:#23452d;
+  white-space:nowrap;
+}
+dd{
+  margin:0;
+  color:#2a3a2e;
+}
+footer{
+  text-align:center;
+  color:#6d7d71;
+  font-size:13px;
+  padding:8px 10px 24px;
+}
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:40px 20px;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>TURF 235 • Study Guide</h1>
+  <p>Reference table of vegetative identification traits for all 20 species. Use it to review before trying the <a href="text-quiz.html">text quiz</a> or the <a href="flashcards.html">picture flashcards</a>.</p>
+  <p><a href="../../index.html">← All modules</a></p>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <input type="search" id="search" placeholder="Search species or trait…">
+    <select id="groupSelect">
+      <option value="all">All groups</option>
+      <option value="Bluegrass">Bluegrass</option>
+      <option value="Bentgrass">Bentgrass</option>
+      <option value="Ryegrass / Fescue">Ryegrass / Fescue</option>
+      <option value="Bermuda">Bermuda</option>
+      <option value="Zoysia">Zoysia</option>
+      <option value="Broad-blade warm-season">Broad-blade warm-season</option>
+    </select>
+  </div>
+</div>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>Trait descriptions are compiled study aids, not official course material — cross-check against your TURF 235 references before an exam.</footer>
+
+<script>
+const TRAITS = [
+  {"name":"Kentucky bluegrass","latin":"Poa pratensis","group":"Bluegrass","image":"assets/kentucky-bluegrass.jpg",
+    "vernation":"Folded","ligule":"Membranous, short, blunt (truncate)","auricles":"Absent",
+    "collar":"Narrow, light green, divided by the midrib","blade":"Boat-shaped (prow) tip, parallel sides, soft",
+    "adaxial":"Two parallel \"railroad-track\" veins beside the midrib","abaxial":"Glossy and keeled",
+    "inflorescence":"Open, pyramidal panicle","growthHabit":"Rhizomatous"},
+  {"name":"Rough bluegrass","latin":"Poa trivialis","group":"Bluegrass","image":"assets/rough-bluegrass.jpg",
+    "vernation":"Folded","ligule":"Membranous, long and pointed","auricles":"Absent",
+    "collar":"Narrow, light green","blade":"Boat-shaped tip, glossy on both surfaces",
+    "adaxial":"Glossy sheen, faint parallel veins","abaxial":"Very glossy, keeled",
+    "inflorescence":"Open, pyramidal panicle","growthHabit":"Stoloniferous"},
+  {"name":"Annual bluegrass","latin":"Poa annua","group":"Bluegrass","image":"assets/annual-bluegrass.jpg",
+    "vernation":"Folded","ligule":"Membranous, medium length, pointed","auricles":"Absent",
+    "collar":"Narrow, light yellow-green, smooth","blade":"Boat-shaped tip, soft, often crinkled near the tip",
+    "adaxial":"Faint parallel veins, slightly crinkled texture","abaxial":"Glossy and keeled",
+    "inflorescence":"Open panicle, produced nearly year-round","growthHabit":"Bunch-type (some biotypes weakly spreading)"},
+  {"name":"Creeping bentgrass","latin":"Agrostis stolonifera","group":"Bentgrass","image":"assets/creeping-bentgrass.jpg",
+    "vernation":"Rolled","ligule":"Membranous, long, pointed, often toothed","auricles":"Absent",
+    "collar":"Narrow, continuous","blade":"Fine, narrow, tapering to a fine point",
+    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
+    "inflorescence":"Open to contracted, narrow panicle","growthHabit":"Stoloniferous"},
+  {"name":"Colonial bentgrass","latin":"Agrostis capillaris","group":"Bentgrass","image":"assets/colonial-bentgrass.jpg",
+    "vernation":"Rolled","ligule":"Membranous, short, truncate","auricles":"Absent",
+    "collar":"Narrow","blade":"Fine-textured, flat, tapering",
+    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
+    "inflorescence":"Open, airy panicle","growthHabit":"Short rhizomes and weak stolons"},
+  {"name":"Velvet bentgrass","latin":"Agrostis canina","group":"Bentgrass","image":"assets/velvet-bentgrass.jpg",
+    "vernation":"Rolled","ligule":"Membranous, long, pointed (longest of the group)","auricles":"Absent",
+    "collar":"Narrow","blade":"Very fine, bristle-like, the narrowest blade of the group",
+    "adaxial":"Finely ribbed","abaxial":"Smooth and glossy",
+    "inflorescence":"Narrow, contracted panicle","growthHabit":"Fine stolons, forms a dense mat"},
+  {"name":"Redtop","latin":"Agrostis gigantea","group":"Bentgrass","image":"assets/redtop.jpg",
+    "vernation":"Rolled","ligule":"Membranous, long and pointed","auricles":"Absent",
+    "collar":"Broad, more distinct than others in its group","blade":"Wider and coarser than related fine-textured grasses, flat",
+    "adaxial":"Ribbed","abaxial":"Smooth and glossy",
+    "inflorescence":"Open panicle, often reddish-tinged","growthHabit":"Short, stout rhizomes"},
+  {"name":"Perennial ryegrass","latin":"Lolium perenne","group":"Ryegrass / Fescue","image":"assets/perennial-ryegrass.jpg",
+    "vernation":"Folded","ligule":"Membranous, short","auricles":"Present, small, claw-like",
+    "collar":"Broad, distinct, often pale-margined","blade":"Tapering, prominent midrib",
+    "adaxial":"Dull, prominently ribbed","abaxial":"Glossy, keeled (double-track shine)",
+    "inflorescence":"Spike, spikelets set edgewise, usually awnless","growthHabit":"Bunch-type"},
+  {"name":"Annual ryegrass","latin":"Lolium multiflorum","group":"Ryegrass / Fescue","image":"assets/annual-ryegrass.jpg",
+    "vernation":"Rolled","ligule":"Membranous, medium length","auricles":"Present, larger, often clasping",
+    "collar":"Broad","blade":"Wider blade than its folded-vernation relative, glossy underside",
+    "adaxial":"Dull, ribbed","abaxial":"Glossy, keeled",
+    "inflorescence":"Spike, spikelets usually awned","growthHabit":"Bunch-type"},
+  {"name":"Tall fescue","latin":"Festuca arundinacea","group":"Ryegrass / Fescue","image":"assets/tall-fescue.jpg",
+    "vernation":"Rolled","ligule":"Membranous, very short (minute)","auricles":"Present, small, blunt, finely ciliate",
+    "collar":"Broad, divided, may bear short hairs at the margin","blade":"Wide, coarse, prominent widely spaced veins, rough margins",
+    "adaxial":"Prominent, widely spaced ribs, glossy","abaxial":"Glossy and keeled",
+    "inflorescence":"Large, open panicle","growthHabit":"Bunch-type (short rhizomes in turf-type forms)"},
+  {"name":"Red fescue","latin":"Festuca rubra","group":"Ryegrass / Fescue","image":"assets/red-fescue.jpg",
+    "vernation":"Folded","ligule":"Membranous, very short, truncate","auricles":"Absent",
+    "collar":"Narrow, smooth","blade":"Very fine, bristle-like, folded/involute",
+    "adaxial":"Ribbed","abaxial":"Smooth, slightly keeled",
+    "inflorescence":"Narrow panicle","growthHabit":"Rhizomatous"},
+  {"name":"Sheep fescue","latin":"Festuca ovina","group":"Ryegrass / Fescue","image":"assets/sheep-fescue.jpg",
+    "vernation":"Folded","ligule":"Membranous, very short, truncate","auricles":"Absent",
+    "collar":"Narrow","blade":"Extremely fine, bristle-like, blue-green, involute (round in cross-section)",
+    "adaxial":"Ribbed","abaxial":"Smooth",
+    "inflorescence":"Narrow, compact panicle","growthHabit":"Bunch-type"},
+  {"name":"Bermudagrass","latin":"Cynodon dactylon","group":"Bermuda","image":"assets/bermudagrass.jpg",
+    "vernation":"Folded","ligule":"Fringe of hairs","auricles":"Absent",
+    "collar":"Broad, hairy margins","blade":"Flat to slightly folded, rough margins, pointed tip",
+    "adaxial":"Sparse hairs near the base, ribbed","abaxial":"Smooth, keeled",
+    "inflorescence":"Digitate raceme (\"crow's foot\" of finger-like spikes)","growthHabit":"Both stolons and rhizomes"},
+  {"name":"Hybrid bermudagrass","latin":"Cynodon dactylon × Cynodon transvaalensis","group":"Bermuda","image":"assets/hybrid-bermudagrass.jpg",
+    "vernation":"Folded","ligule":"Fringe of hairs","auricles":"Absent",
+    "collar":"Broad, sparsely hairy","blade":"Fine and dense",
+    "adaxial":"Sparse hairs, ribbed","abaxial":"Smooth, keeled",
+    "inflorescence":"Digitate raceme, rarely fertile","growthHabit":"Both stolons and rhizomes, very dense"},
+  {"name":"Mascarenegrass","latin":"Zoysia tenuifolia","group":"Zoysia","image":"assets/mascarenegrass.jpg",
+    "vernation":"Rolled","ligule":"Fringe of hairs, very short","auricles":"Absent",
+    "collar":"Narrow, hairy","blade":"Extremely fine, short, densely hairy",
+    "adaxial":"Densely hairy","abaxial":"Sparsely hairy to smooth",
+    "inflorescence":"Short, compact terminal spike-like raceme","growthHabit":"Stoloniferous, mounding \"puffy\" texture"},
+  {"name":"Hybrid zoysia","latin":"Zoysia japonica × Zoysia tenuifolia","group":"Zoysia","image":"assets/hybrid-zoysia.jpg",
+    "vernation":"Rolled","ligule":"Fringe of hairs, short","auricles":"Absent",
+    "collar":"Narrow, sparsely hairy","blade":"Fine to medium texture",
+    "adaxial":"Sparsely hairy","abaxial":"Smooth to sparsely hairy",
+    "inflorescence":"Terminal, spike-like raceme","growthHabit":"Both stolons and rhizomes"},
+  {"name":"Manilagrass","latin":"Zoysia matrella","group":"Zoysia","image":"assets/manilagrass.jpg",
+    "vernation":"Rolled","ligule":"Fringe of hairs, very short","auricles":"Absent",
+    "collar":"Narrow, sparsely hairy margins","blade":"Fine, stiff, pointed tip",
+    "adaxial":"Sparsely hairy near the base","abaxial":"Smooth, glossy",
+    "inflorescence":"Slender, terminal spike-like raceme","growthHabit":"Both stolons and rhizomes"},
+  {"name":"St. Augustinegrass","latin":"Stenotaphrum secundatum","group":"Broad-blade warm-season","image":"assets/st-augustinegrass.jpg",
+    "vernation":"Folded","ligule":"Fringe of hairs, very short","auricles":"Absent",
+    "collar":"Broad, sparsely hairy margins","blade":"Very broad, coarse, blunt/rounded tip",
+    "adaxial":"Prominent midrib, sparsely hairy","abaxial":"Smooth, glossy, prominent keel",
+    "inflorescence":"Flattened spike embedded in a thickened stem","growthHabit":"Stoloniferous, coarse thick stolons"},
+  {"name":"Centipedegrass","latin":"Eremochloa ophiuroides","group":"Broad-blade warm-season","image":"assets/centipedegrass.jpg",
+    "vernation":"Folded","ligule":"Fringe of hairs, very short","auricles":"Absent",
+    "collar":"Broad, sparsely hairy","blade":"Short, broad, blunt (boat-shaped) tip",
+    "adaxial":"Prominent midrib, sparsely hairy","abaxial":"Smooth, keeled",
+    "inflorescence":"Slender, short terminal raceme","growthHabit":"Stoloniferous, slow-growing dense mat"},
+  {"name":"Bahiagrass","latin":"Paspalum notatum","group":"Broad-blade warm-season","image":"assets/bahiagrass.jpg",
+    "vernation":"Rolled","ligule":"Membranous, short, fringed with hairs","auricles":"Absent",
+    "collar":"Broad, sparsely hairy margins","blade":"Broad, coarse, flat, tough",
+    "adaxial":"Prominent midrib, sparsely hairy at the base","abaxial":"Smooth, glossy",
+    "inflorescence":"Y-shaped, usually two spike-like racemes","growthHabit":"Rhizomatous, thick and tough rhizomes"}
+];
+
+const FIELDS = [
+  {key:"vernation", label:"Vernation"},
+  {key:"ligule", label:"Ligule"},
+  {key:"auricles", label:"Auricles"},
+  {key:"collar", label:"Collar"},
+  {key:"blade", label:"Blade"},
+  {key:"adaxial", label:"Adaxial"},
+  {key:"abaxial", label:"Abaxial"},
+  {key:"inflorescence", label:"Inflorescence"},
+  {key:"growthHabit", label:"Growth habit"}
+];
+
+function escapeHtml(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function cardHtml(card){
+  const rows = FIELDS.map(f => `<dt>${f.label}</dt><dd>${escapeHtml(card[f.key])}</dd>`).join("");
+  return `
+    <article class="card">
+      <img src="${card.image}" alt="${escapeHtml(card.name)}">
+      <div class="card-body">
+        <h2>${escapeHtml(card.name)}</h2>
+        <p class="latin">${escapeHtml(card.latin)}</p>
+        <span class="badge">${escapeHtml(card.group)}</span>
+        <dl>${rows}</dl>
+      </div>
+    </article>`;
+}
+
+function render(){
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const g = document.getElementById("groupSelect").value;
+  const grid = document.getElementById("grid");
+
+  const filtered = TRAITS.filter(card => {
+    const groupOk = g === "all" ? true : card.group === g;
+    if(!groupOk) return false;
+    if(!q) return true;
+    const haystack = [card.name, card.latin, card.group, ...FIELDS.map(f => card[f.key])].join(" ").toLowerCase();
+    return haystack.includes(q);
+  });
+
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="empty">No species match your search/filter.</div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(cardHtml).join("");
+}
+
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("groupSelect").addEventListener("change", render);
+render();
+</script>
+</body>
+</html>

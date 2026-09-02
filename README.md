@@ -88,33 +88,27 @@ will show only species matching both conditions.
 
 ## Files
 
+The site is organized as a landing page linking out to per-course modules. Only the TURF 235 module has real content so far; the rest are placeholders reserving the structure.
+
 ```text
-turf235_flashcards_site_v3/
-├── index.html
-├── data.json
-├── README.md
-└── assets/
-    ├── annual-bluegrass.jpg
-    ├── annual-ryegrass.jpg
-    ├── bahiagrass.jpg
-    ├── bermudagrass.jpg
-    ├── centipedegrass.jpg
-    ├── colonial-bentgrass.jpg
-    ├── creeping-bentgrass.jpg
-    ├── hybrid-bermudagrass.jpg
-    ├── hybrid-zoysia.jpg
-    ├── kentucky-bluegrass.jpg
-    ├── manilagrass.jpg
-    ├── mascarenegrass.jpg
-    ├── perennial-ryegrass.jpg
-    ├── red-fescue.jpg
-    ├── redtop.jpg
-    ├── rough-bluegrass.jpg
-    ├── sheep-fescue.jpg
-    ├── st-augustinegrass.jpg
-    ├── tall-fescue.jpg
-    └── velvet-bentgrass.jpg
+public_html/
+├── index.html                     landing page, links to every module
+└── modules/
+    ├── turf235/                   TURF 235 — The Turfgrass (active)
+    │   ├── flashcards.html        picture-based multiple choice quiz
+    │   ├── study-guide.html       browsable trait reference for all 20 species
+    │   ├── text-quiz.html         fill-in-the-dropdowns vegetative traits quiz
+    │   ├── data.json
+    │   ├── README.txt
+    │   └── assets/                species photos
+    ├── turf230/                   TURF 230 — Turfgrass Pesticides (placeholder)
+    ├── turf238-307/               TURF 238/307 — Weed Control & Golf Course Irrigation (placeholder)
+    ├── turf434/                   TURF 434 — Turfgrass Edaphology (placeholder)
+    ├── turf435/                   TURF 435 — Turfgrass Nutrition (placeholder)
+    └── turf436w/                  TURF 436W — Case Studies in Turfgrass Management (placeholder)
 ```
+
+Each module folder holds a `study-guide.html` and a `text-quiz.html`. Add real content to a placeholder module by replacing those two files.
 
 ## Hosting
 
