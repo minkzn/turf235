@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Kentucky bluegrass",
+    "latin": "Poa pratensis",
+    "group": "Bluegrass",
+    "vernation": "folded",
+    "image": "assets/kentucky-bluegrass.jpg"
+  },
+  {
+    "name": "Rough bluegrass",
+    "latin": "Poa trivialis",
+    "group": "Bluegrass",
+    "vernation": "folded",
+    "image": "assets/rough-bluegrass.jpg"
+  },
+  {
+    "name": "Annual bluegrass",
+    "latin": "Poa annua",
+    "group": "Bluegrass",
+    "vernation": "folded",
+    "image": "assets/annual-bluegrass.jpg"
+  },
+  {
+    "name": "Creeping bentgrass",
+    "latin": "Agrostis stolonifera",
+    "group": "Bentgrass",
+    "vernation": "rolled",
+    "image": "assets/creeping-bentgrass.jpg"
+  },
+  {
+    "name": "Colonial bentgrass",
+    "latin": "Agrostis capillaris",
+    "group": "Bentgrass",
+    "vernation": "rolled",
+    "image": "assets/colonial-bentgrass.jpg"
+  },
+  {
+    "name": "Velvet bentgrass",
+    "latin": "Agrostis canina",
+    "group": "Bentgrass",
+    "vernation": "rolled",
+    "image": "assets/velvet-bentgrass.jpg"
+  },
+  {
+    "name": "Redtop",
+    "latin": "Agrostis gigantea",
+    "group": "Bentgrass",
+    "vernation": "rolled",
+    "image": "assets/redtop.jpg"
+  },
+  {
+    "name": "Perennial ryegrass",
+    "latin": "Lolium perenne",
+    "group": "Ryegrass / Fescue",
+    "vernation": "folded",
+    "image": "assets/perennial-ryegrass.jpg"
+  },
+  {
+    "name": "Annual ryegrass",
+    "latin": "Lolium multiflorum",
+    "group": "Ryegrass / Fescue",
+    "vernation": "rolled",
+    "image": "assets/annual-ryegrass.jpg"
+  },
+  {
+    "name": "Tall fescue",
+    "latin": "Festuca arundinacea",
+    "group": "Ryegrass / Fescue",
+    "vernation": "rolled",
+    "image": "assets/tall-fescue.jpg"
+  },
+  {
+    "name": "Red fescue",
+    "latin": "Festuca rubra",
+    "group": "Ryegrass / Fescue",
+    "vernation": "folded",
+    "image": "assets/red-fescue.jpg"
+  },
+  {
+    "name": "Sheep fescue",
+    "latin": "Festuca ovina",
+    "group": "Ryegrass / Fescue",
+    "vernation": "folded",
+    "image": "assets/sheep-fescue.jpg"
+  },
+  {
+    "name": "Bermudagrass",
+    "latin": "Cynodon dactylon",
+    "group": "Bermuda",
+    "vernation": "folded",
+    "image": "assets/bermudagrass.jpg"
+  },
+  {
+    "name": "Hybrid bermudagrass",
+    "latin": "Cynodon dactylon × Cynodon transvaalensis",
+    "group": "Bermuda",
+    "vernation": "folded",
+    "image": "assets/hybrid-bermudagrass.jpg"
+  },
+  {
+    "name": "Mascarenegrass",
+    "latin": "Zoysia tenuifolia",
+    "group": "Zoysia",
+    "vernation": "rolled",
+    "image": "assets/mascarenegrass.jpg"
+  },
+  {
+    "name": "Hybrid zoysia",
+    "latin": "Zoysia japonica × Zoysia tenuifolia",
+    "group": "Zoysia",
+    "vernation": "rolled",
+    "image": "assets/hybrid-zoysia.jpg"
+  },
+  {
+    "name": "Manilagrass",
+    "latin": "Zoysia matrella",
+    "group": "Zoysia",
+    "vernation": "rolled",
+    "image": "assets/manilagrass.jpg"
+  },
+  {
+    "name": "St. Augustinegrass",
+    "latin": "Stenotaphrum secundatum",
+    "group": "Broad-blade warm-season",
+    "vernation": "folded",
+    "image": "assets/st-augustinegrass.jpg"
+  },
+  {
+    "name": "Centipedegrass",
+    "latin": "Eremochloa ophiuroides",
+    "group": "Broad-blade warm-season",
+    "vernation": "folded",
+    "image": "assets/centipedegrass.jpg"
+  },
+  {
+    "name": "Bahiagrass",
+    "latin": "Paspalum notatum",
+    "group": "Broad-blade warm-season",
+    "vernation": "rolled",
+    "image": "assets/bahiagrass.jpg"
+  }
+]
