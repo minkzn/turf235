@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TURF 235 • Modules</title>
+<style>
+:root{
+  --green:#0d5722;
+  --green2:#1b7333;
+  --paper:#fbfcf8;
+  --line:#c7d8c8;
+  --muted:#5e6f62;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  color:#142018;
+  background:linear-gradient(#f6fbf6,#ecf4ec);
+}
+header{
+  text-align:center;
+  padding:36px 16px 14px;
+}
+h1{
+  margin:0;
+  color:var(--green);
+  font-size:clamp(30px,4.8vw,56px);
+  line-height:1;
+}
+header p{
+  color:var(--muted);
+  margin:10px auto 0;
+  max-width:760px;
+}
+main{
+  max-width:900px;
+  margin:24px auto 48px;
+  padding:0 14px;
+}
+.grid{
+  display:grid;
+  gap:18px;
+}
+.card{
+  background:var(--paper);
+  border:2px solid var(--green);
+  border-radius:22px;
+  padding:20px 22px;
+  box-shadow:0 12px 30px rgba(13,87,34,.10);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.card.placeholder{
+  border-style:dashed;
+  opacity:.85;
+}
+.card h2{
+  margin:0 0 6px;
+  font-size:20px;
+  color:#142018;
+}
+.status{
+  display:inline-block;
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:12px;
+  font-weight:700;
+}
+.status.ready{
+  background:#edf8ef;
+  color:var(--green);
+  border:1px solid var(--green2);
+}
+.status.soon{
+  background:#f3efe6;
+  color:#8a6d1f;
+  border:1px solid #d8c48c;
+}
+.links{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.links a{
+  font-weight:700;
+  text-decoration:none;
+  color:white;
+  background:var(--green);
+  border:1px solid var(--green);
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:14px;
+}
+.links a.secondary{
+  background:white;
+  color:var(--green);
+}
+footer{
+  text-align:center;
+  color:#6d7d71;
+  font-size:13px;
+  padding:8px 10px 24px;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>TURF 235 • The Turfgrass</h1>
+  <p>Study guides, flashcards, and text quizzes by module.</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <section class="card">
+      <div>
+        <h2>Module 1: A Campus Walk</h2>
+        <span class="status soon">Outline only</span>
+      </div>
+      <div class="links">
+        <a href="module1/index.html">Study Guide</a>
+        <a class="secondary" href="module1/flashcards.html">Flashcards</a>
+        <a class="secondary" href="module1/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div>
+        <h2>Module 2: Up Close and Personal</h2>
+        <span class="status ready">Available</span>
+      </div>
+      <div class="links">
+        <a href="module2/index.html">Study Guide</a>
+        <a class="secondary" href="module2/flashcards.html">Flashcards</a>
+        <a class="secondary" href="module2/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div>
+        <h2>Module 3: Watching Grass Grow: Vegetatively</h2>
+        <span class="status soon">Outline only</span>
+      </div>
+      <div class="links">
+        <a href="module3/index.html">Study Guide</a>
+        <a class="secondary" href="module3/flashcards.html">Flashcards</a>
+        <a class="secondary" href="module3/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div>
+        <h2>Module 4: Watching Grass Grow: Reproductively</h2>
+        <span class="status soon">Outline only</span>
+      </div>
+      <div class="links">
+        <a href="module4/index.html">Study Guide</a>
+        <a class="secondary" href="module4/flashcards.html">Flashcards</a>
+        <a class="secondary" href="module4/text-quiz.html">Text Quiz</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>Study aids only — not official course material.</footer>
+</body>
+</html>

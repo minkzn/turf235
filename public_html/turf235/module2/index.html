@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TURF 235 • Vegetative Traits Quiz</title>
+<title>TURF 235 • Study Guide</title>
 <style>
 :root{
   --green:#0d5722;
@@ -11,8 +11,6 @@
   --paper:#fbfcf8;
   --line:#c7d8c8;
   --muted:#5e6f62;
-  --good:#1f7a35;
-  --bad:#b33535;
 }
 *{box-sizing:border-box}
 body{
@@ -59,185 +57,81 @@ header a{
   align-items:center;
   justify-content:center;
 }
-button, select{
+select, input{
   font:inherit;
   border:1px solid #aabdad;
   border-radius:12px;
   background:white;
   padding:10px 14px;
   font-weight:700;
-  cursor:pointer;
 }
-button.primary{
-  background:var(--green);
-  color:white;
-  border-color:var(--green);
-}
-button.secondary{
-  background:#eef5ee;
-}
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+input#search{
+  min-width:220px;
+  font-weight:500;
 }
 main{
   max-width:1220px;
   margin:18px auto 40px;
   padding:0 14px;
 }
-.stats{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:14px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+  gap:18px;
 }
-.stat{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:8px 14px;
-  font-weight:700;
-  color:#23452d;
-}
-.panel{
+.card{
   background:var(--paper);
   border:2px solid var(--green);
-  border-radius:24px;
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 12px 30px rgba(13,87,34,.12);
+  box-shadow:0 10px 24px rgba(13,87,34,.10);
 }
-.panel-head{
-  background:linear-gradient(90deg,var(--green),#174b24);
-  color:white;
-  padding:12px 16px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:space-between;
-  align-items:center;
-}
-.panel-head b{
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-.panel-body{
-  display:grid;
-  grid-template-columns:minmax(280px, 420px) 1fr;
-  gap:20px;
-  padding:18px;
-  align-items:start;
-}
-@media (max-width: 900px){
-  .panel-body{ grid-template-columns:1fr; }
-}
-.figure-wrap{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:12px;
-  position:sticky;
-  top:80px;
-}
-.figure-wrap img{
+.card img{
   width:100%;
-  height:auto;
+  height:160px;
+  object-fit:cover;
   display:block;
-  border-radius:12px;
+  border-bottom:1px solid var(--line);
 }
-.figure-wrap h2{
-  margin:10px 4px 2px;
+.card-body{
+  padding:14px 16px 16px;
+}
+.card-body h2{
+  margin:0;
   color:var(--green);
-  font-size:24px;
+  font-size:20px;
 }
-.figure-wrap p{
-  margin:0 4px;
+.card-body .latin{
   color:var(--muted);
   font-style:italic;
+  margin:2px 0 10px;
 }
-.trait-form h2{
-  margin:4px 0 6px;
-  color:var(--green);
-  font-size:22px;
+.badge{
+  display:inline-block;
+  background:#eef5ee;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:12px;
+  font-weight:700;
+  color:#23452d;
+  margin-bottom:10px;
 }
-.trait-form > p{
-  color:var(--muted);
-  margin-top:0;
-}
-.trait-grid{
+dl{
+  margin:0;
   display:grid;
-  gap:12px;
-  margin-top:10px;
+  grid-template-columns:auto 1fr;
+  gap:4px 10px;
+  font-size:14px;
 }
-.trait-row{
-  background:white;
-  border:2px solid #b8cab9;
-  border-radius:14px;
-  padding:10px 14px;
-  transition:border-color .15s, background .15s;
-}
-.trait-row label{
-  display:block;
+dt{
   font-weight:800;
   color:#23452d;
-  font-size:14px;
-  margin-bottom:6px;
+  white-space:nowrap;
 }
-.trait-row select{
-  width:100%;
-  padding:10px 12px;
-}
-.trait-row.correct{
-  background:#edf8ef;
-  border-color:var(--good);
-}
-.trait-row.wrong{
-  background:#fff0f0;
-  border-color:var(--bad);
-}
-.trait-correct{
-  display:none;
-  margin-top:6px;
-  font-size:13px;
-  color:var(--bad);
-}
-.trait-correct b{ color:#142018; }
-.trait-row.wrong .trait-correct{ display:block; }
-.feedback{
-  margin-top:14px;
-  min-height:26px;
-  font-weight:800;
-  font-size:18px;
-}
-.feedback.good{ color:var(--good); }
-.feedback.bad{ color:var(--bad); }
-.help{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:14px;
-}
-.action-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-.empty{
-  text-align:center;
-  background:white;
-  border:2px solid var(--green);
-  border-radius:24px;
-  padding:34px 20px;
-  box-shadow:0 12px 30px rgba(13,87,34,.10);
-}
-.empty h2{
-  color:var(--green);
-  font-size:36px;
-  margin:0 0 8px;
-}
-.empty p{
-  color:var(--muted);
-  margin:6px 0;
+dd{
+  margin:0;
+  color:#2a3a2e;
 }
 footer{
   text-align:center;
@@ -245,28 +139,23 @@ footer{
   font-size:13px;
   padding:8px 10px 24px;
 }
-kbd{
-  background:#eef3ed;
-  border:1px solid #c9d4ca;
-  border-bottom-width:2px;
-  border-radius:6px;
-  padding:1px 5px;
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:40px 20px;
 }
 </style>
 </head>
 <body>
 <header>
-  <h1>TURF 235 • Vegetative Traits Quiz</h1>
-  <p>The species is shown for each card. Fill in all nine dropdowns with the correct vegetative identification traits, then hit <b>Submit</b>. A card only clears the deck once every trait is correct — otherwise it cycles back for another try.</p>
-  <p><a href="flashcards.html">← Back to the picture ID flashcards</a> • <a href="study-guide.html">Study guide</a> • <a href="../../index.html">All modules</a></p>
+  <h1>TURF 235 • Study Guide</h1>
+  <p>Reference table of vegetative identification traits for all 20 species. Use it to review before trying the <a href="text-quiz.html">text quiz</a> or the <a href="flashcards.html">picture flashcards</a>.</p>
+  <p><a href="../index.html">← All modules</a></p>
 </header>
 
 <div class="toolbar">
   <div class="toolbar-inner">
-    <button class="primary" id="btnShuffle">Shuffle Deck</button>
-    <button class="secondary" id="btnPrev">← Previous</button>
-    <button class="secondary" id="btnNext">Skip / Next →</button>
-    <button class="primary" id="btnProceed" disabled>Proceed</button>
+    <input type="search" id="search" placeholder="Search species or trait…">
     <select id="groupSelect">
       <option value="all">All groups</option>
       <option value="Bluegrass">Bluegrass</option>
@@ -276,20 +165,14 @@ kbd{
       <option value="Zoysia">Zoysia</option>
       <option value="Broad-blade warm-season">Broad-blade warm-season</option>
     </select>
-    <button id="btnReset">Reset Progress</button>
   </div>
 </div>
 
 <main>
-  <div class="stats">
-    <div class="stat" id="statRemaining">Remaining: 0</div>
-    <div class="stat" id="statCorrect">Fully correct: 0</div>
-    <div class="stat" id="statWrong">Needs review: 0</div>
-  </div>
-  <div id="app"></div>
+  <div class="grid" id="grid"></div>
 </main>
 
-<footer>Keyboard: <kbd>Enter</kbd> submit / proceed • <kbd>←</kbd> previous • <kbd>→</kbd> skip/next</footer>
+<footer>Trait descriptions are compiled study aids, not official course material — cross-check against your TURF 235 references before an exam.</footer>
 
 <script>
 const TRAITS = [
@@ -401,262 +284,53 @@ const FIELDS = [
   {key:"auricles", label:"Auricles"},
   {key:"collar", label:"Collar"},
   {key:"blade", label:"Blade"},
-  {key:"adaxial", label:"Adaxial (upper) surface"},
-  {key:"abaxial", label:"Abaxial (lower) surface"},
+  {key:"adaxial", label:"Adaxial"},
+  {key:"abaxial", label:"Abaxial"},
   {key:"inflorescence", label:"Inflorescence"},
   {key:"growthHabit", label:"Growth habit"}
 ];
 
-const OPTIONS = {};
-FIELDS.forEach(f => {
-  OPTIONS[f.key] = Array.from(new Set(TRAITS.map(c => c[f.key]))).sort((a,b) => a.localeCompare(b));
-});
-
-let deck = [];
-let cursor = 0;
-let fullyCorrectCount = 0;
-let needsReviewCount = 0;
-let graded = false;
-let pendingProceed = false;
-
-function shuffleArray(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+function escapeHtml(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
 
-function filteredDeck(){
-  const g = document.getElementById("groupSelect").value;
-  return TRAITS.filter(card => g === "all" ? true : card.group === g);
-}
-
-function resetDeck(shuffle=true){
-  deck = filteredDeck();
-  if(shuffle) shuffleArray(deck);
-  cursor = 0;
-  fullyCorrectCount = 0;
-  needsReviewCount = 0;
-  graded = false;
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-}
-
-function updateStats(){
-  document.getElementById("statRemaining").textContent = "Remaining: " + deck.length;
-  document.getElementById("statCorrect").textContent = "Fully correct: " + fullyCorrectCount;
-  document.getElementById("statWrong").textContent = "Needs review: " + needsReviewCount;
-}
-
-function updateProceedButton(){
-  document.getElementById("btnProceed").disabled = !pendingProceed;
-}
-
-function showDone(){
-  updateStats();
-  updateProceedButton();
-  document.getElementById("app").innerHTML = `
-    <section class="empty">
-      <h2>Deck complete</h2>
-      <p>You correctly identified every vegetative trait for every active card in this filtered deck.</p>
-      <p>Use <b>Reset Progress</b> to run it again, or change the group filter.</p>
-    </section>`;
+function cardHtml(card){
+  const rows = FIELDS.map(f => `<dt>${f.label}</dt><dd>${escapeHtml(card[f.key])}</dd>`).join("");
+  return `
+    <article class="card">
+      <img src="${card.image}" alt="${escapeHtml(card.name)}">
+      <div class="card-body">
+        <h2>${escapeHtml(card.name)}</h2>
+        <p class="latin">${escapeHtml(card.latin)}</p>
+        <span class="badge">${escapeHtml(card.group)}</span>
+        <dl>${rows}</dl>
+      </div>
+    </article>`;
 }
 
 function render(){
-  updateStats();
-  pendingProceed = false;
-  updateProceedButton();
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const g = document.getElementById("groupSelect").value;
+  const grid = document.getElementById("grid");
 
-  const app = document.getElementById("app");
-  if(deck.length === 0){
-    showDone();
-    return;
-  }
-
-  if(cursor < 0) cursor = deck.length - 1;
-  if(cursor >= deck.length) cursor = 0;
-
-  const card = deck[cursor];
-  graded = false;
-
-  const rowsHtml = FIELDS.map(f => {
-    const opts = OPTIONS[f.key].map(v => `<option value="${escapeAttr(v)}">${escapeHtml(v)}</option>`).join("");
-    return `
-      <div class="trait-row" id="row-${f.key}">
-        <label for="select-${f.key}">${f.label}</label>
-        <select id="select-${f.key}" data-field="${f.key}">
-          <option value="" selected disabled>Select ${f.label.toLowerCase()}…</option>
-          ${opts}
-        </select>
-        <div class="trait-correct" id="correct-${f.key}"></div>
-      </div>`;
-  }).join("");
-
-  app.innerHTML = `
-    <section class="panel">
-      <div class="panel-head">
-        <b>Vegetative traits</b>
-        <span>Card ${cursor + 1} of ${deck.length} • ${card.group}</span>
-      </div>
-      <div class="panel-body">
-        <div class="figure-wrap">
-          <img src="${card.image}" alt="Turfgrass flashcard image">
-          <h2>${card.name}</h2>
-          <p>${card.latin}</p>
-        </div>
-        <div class="trait-form">
-          <h2>Select the correct trait for each category</h2>
-          <p>Every dropdown must be answered before you can submit.</p>
-          <div class="trait-grid" id="traitGrid">${rowsHtml}</div>
-          <div class="feedback" id="feedback"></div>
-          <div class="help">Cards clear the deck only when all nine traits are correct. Any miss sends the card to the back for another attempt.</div>
-          <div class="action-row">
-            <button class="primary" id="btnSubmit" disabled>Submit</button>
-            <button class="primary" id="inlineProceed" disabled>Proceed</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
-
-  FIELDS.forEach(f => {
-    document.getElementById(`select-${f.key}`).addEventListener("change", updateSubmitState);
-  });
-  document.getElementById("btnSubmit").addEventListener("click", submitAnswers);
-  document.getElementById("inlineProceed").addEventListener("click", proceed);
-}
-
-function updateSubmitState(){
-  const allAnswered = FIELDS.every(f => document.getElementById(`select-${f.key}`).value !== "");
-  document.getElementById("btnSubmit").disabled = !allAnswered || graded;
-}
-
-function escapeHtml(s){
-  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
-function escapeAttr(s){
-  return escapeHtml(s).replace(/"/g,"&quot;");
-}
-
-function submitAnswers(){
-  if(graded || deck.length === 0) return;
-  graded = true;
-
-  const card = deck[cursor];
-  const feedback = document.getElementById("feedback");
-  let correctCount = 0;
-
-  FIELDS.forEach(f => {
-    const select = document.getElementById(`select-${f.key}`);
-    const row = document.getElementById(`row-${f.key}`);
-    const correctBox = document.getElementById(`correct-${f.key}`);
-    select.disabled = true;
-    const isCorrect = select.value === card[f.key];
-    if(isCorrect){
-      correctCount++;
-      row.classList.add("correct");
-    } else {
-      row.classList.add("wrong");
-      correctBox.innerHTML = `Correct answer: <b>${escapeHtml(card[f.key])}</b>`;
-    }
+  const filtered = TRAITS.filter(card => {
+    const groupOk = g === "all" ? true : card.group === g;
+    if(!groupOk) return false;
+    if(!q) return true;
+    const haystack = [card.name, card.latin, card.group, ...FIELDS.map(f => card[f.key])].join(" ").toLowerCase();
+    return haystack.includes(q);
   });
 
-  document.getElementById("btnSubmit").disabled = true;
-
-  if(correctCount === FIELDS.length){
-    fullyCorrectCount++;
-    feedback.className = "feedback good";
-    feedback.textContent = `All ${FIELDS.length} correct — removed from the active deck. Click Proceed when ready.`;
-    deck.splice(cursor, 1);
-    if(cursor >= deck.length) cursor = 0;
-  } else {
-    needsReviewCount++;
-    feedback.className = "feedback bad";
-    feedback.textContent = `${correctCount} of ${FIELDS.length} correct — this one will come back later. Click Proceed when ready.`;
-    const missed = deck.splice(cursor, 1)[0];
-    deck.push(missed);
-    if(cursor >= deck.length) cursor = 0;
-  }
-
-  enableProceed();
-  updateStats();
-}
-
-function enableProceed(){
-  pendingProceed = true;
-  updateProceedButton();
-  const inline = document.getElementById("inlineProceed");
-  if(inline) inline.disabled = false;
-}
-
-function proceed(){
-  if(!pendingProceed) return;
-  render();
-}
-
-function nextCard(){
-  if(pendingProceed){
-    proceed();
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="empty">No species match your search/filter.</div>`;
     return;
   }
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  const skipped = deck.splice(cursor, 1)[0];
-  deck.push(skipped);
-  if(cursor >= deck.length) cursor = 0;
-  render();
+  grid.innerHTML = filtered.map(cardHtml).join("");
 }
 
-function prevCard(){
-  if(deck.length <= 1){
-    render();
-    return;
-  }
-  cursor = (cursor - 1 + deck.length) % deck.length;
-  render();
-}
-
-document.getElementById("btnNext").addEventListener("click", nextCard);
-document.getElementById("btnPrev").addEventListener("click", prevCard);
-document.getElementById("btnProceed").addEventListener("click", proceed);
-document.getElementById("btnShuffle").addEventListener("click", () => {
-  shuffleArray(deck);
-  cursor = 0;
-  pendingProceed = false;
-  updateProceedButton();
-  render();
-});
-document.getElementById("btnReset").addEventListener("click", () => resetDeck(true));
-document.getElementById("groupSelect").addEventListener("change", () => resetDeck(true));
-
-document.addEventListener("keydown", (e) => {
-  const tag = document.activeElement && document.activeElement.tagName;
-  if(e.key === "Enter"){
-    if(tag === "SELECT") return;
-    e.preventDefault();
-    if(pendingProceed){
-      proceed();
-    } else {
-      const btn = document.getElementById("btnSubmit");
-      if(btn && !btn.disabled) submitAnswers();
-    }
-    return;
-  }
-  if(["INPUT","TEXTAREA","SELECT"].includes(tag)) return;
-  if(e.key === "ArrowRight"){
-    e.preventDefault();
-    nextCard();
-  } else if(e.key === "ArrowLeft"){
-    e.preventDefault();
-    prevCard();
-  }
-});
-
-resetDeck(true);
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("groupSelect").addEventListener("change", render);
+render();
 </script>
 </body>
 </html>

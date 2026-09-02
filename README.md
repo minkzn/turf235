@@ -88,25 +88,35 @@ will show only species matching both conditions.
 
 ## Files
 
-The site is organized as a landing page linking out to per-course modules. Only the TURF 235 module has real content so far; the rest are placeholders reserving the structure.
+The site is organized by course module, matching the TURF 235 Canvas module list. `public_html/index.html` just redirects to `turf235/index.html`, which links out to each module. Only Module 2 has real content so far; the others are outline stubs (topic list only) reserving the structure.
 
 ```text
 public_html/
-├── index.html                     landing page, links to every module
-└── modules/
-    ├── turf235/                   TURF 235 — The Turfgrass (active)
+├── index.html                     redirects to turf235/index.html
+└── turf235/
+    ├── index.html                 module list for the course
+    ├── module1/                   Module 1: A Campus Walk (outline only)
+    │   ├── index.html             topic outline / study guide
+    │   ├── flashcards.html        placeholder
+    │   └── text-quiz.html         placeholder
+    ├── module2/                   Module 2: Up Close and Personal (active)
+    │   ├── index.html             browsable trait reference for all 20 species
     │   ├── flashcards.html        picture-based multiple choice quiz
-    │   ├── study-guide.html       browsable trait reference for all 20 species
     │   ├── text-quiz.html         fill-in-the-dropdowns vegetative traits quiz
     │   ├── data.json
     │   ├── README.txt
     │   └── assets/                species photos
-    ├── turf230/                   TURF 230 — Turfgrass Pesticides (placeholder)
-    ├── turf238-307/               TURF 238/307 — Weed Control & Golf Course Irrigation (placeholder)
-    ├── turf434/                   TURF 434 — Turfgrass Edaphology (placeholder)
-    ├── turf435/                   TURF 435 — Turfgrass Nutrition (placeholder)
-    └── turf436w/                  TURF 436W — Case Studies in Turfgrass Management (placeholder)
+    ├── module3/                   Module 3: Watching Grass Grow: Vegetatively (outline only)
+    │   ├── index.html
+    │   ├── flashcards.html
+    │   └── text-quiz.html
+    └── module4/                   Module 4: Watching Grass Grow: Reproductively (outline only)
+        ├── index.html
+        ├── flashcards.html
+        └── text-quiz.html
 ```
+
+Each module folder's `index.html` is its study guide, with `flashcards.html` and `text-quiz.html` alongside it. Fill in a placeholder module by replacing those three files.
 
 Each module folder holds a `study-guide.html` and a `text-quiz.html`. Add real content to a placeholder module by replacing those two files.
 
